@@ -1,64 +1,59 @@
+\documentclass[sigconf]{acmart}
+%%% Local Variables:
+%%% ispell-local-dictionary: "english"
+%%% End:
 
-%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% This is the LaTeX source for the instructions to authors using
-% the LaTeX document class 'llncs.cls' for contributions to
-% the Lecture Notes in Computer Sciences series.
-% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
-%
-% It may be used as a template for your own input - copy it
-% to a new file with a new name and use it as the basis
-% for your article.
-%
-% NB: the document class 'llncs' has its own and detailed documentation, see
-% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\documentclass[runningheads,a4paper]{llncs}
-
-\usepackage{amssymb}
-\setcounter{tocdepth}{3}
+\usepackage{booktabs} % For formal tables
 \usepackage{graphicx}
+\usepackage{rotating}
+\definecolor{Gray}{gray}{0.6}
 
-\usepackage{url}
-\newcommand{\keywords}[1]{\par\addvspace\baselineskip
-\noindent\keywordname\enspace\ignorespaces#1}
+\setcopyright{rightsretained}
+
+% DOI
+\acmDOI{10.1145/nnnnnnn.nnnnnnn}
+
+% ISBN
+\acmISBN{978-x-xxxx-xxxx-x/YY/MM}
+
+
+%Conference
+\acmConference[GECCO '18]{the Genetic and Evolutionary Computation
+Conference 2018}{July 15--19, 2018}{Kyoto, Japan}
+\acmYear{2018}
+\copyrightyear{2018}
+
+
+\acmArticle{4}
+\acmPrice{15.00}
 
 \begin{document}
 
-\mainmatter  % start of an individual contribution
+\title{Mapping evolutionary algorithms to a reactive, stateless architecture
+  using a modern concurrent language}
 
-% first the title is needed
-\title{}
+\author{Juan J. Merelo}
+\orcid{1234-5678-9012}
+\affiliation{%
+  \institution{Universidad de Granada}
+  \streetaddress{Daniel Saucedo Aranda, s/n}
+  \city{Granada}
+  \country{Spain}
+}
+\email{jmerelo@ugr.es}
 
-% a short form should be given in case it is too long for the running head
-\titlerunning{Lecture Notes in Computer Science: Authors' Instructions}
+\author{Mario García-Valcez}
+\affiliation{%
+  \institution{Anonymous institute 2}
+  \streetaddress{P.O. Box 1212}
+  \city{Dublin}
+  \state{Ohio}
+  \postcode{43017-6221}
+}
+\email{2aa@ai2.com}
 
-% the name(s) of the author(s) follow(s) next
-%
-% NB: Chinese authors should write their first names(s) in front of
-% their surnames. This ensures that the names appear correctly in
-% the running heads and the author index.
-%
-\author{Non A. Me%
-\thanks{}}
-%
-\authorrunning{}
-% (feature abused for this document to repeat the title also on left hand pages)
-
-% the affiliations are given next; don't give your e-mail address
-% unless you accept that it will be published
-\institute{No Institute}
-
-%
-% NB: a more complex sample for affiliations and the mapping to the
-% corresponding authors can be found in the file "llncs.dem"
-% (search for the string "\mainmatter" where a contribution starts).
-% "llncs.dem" accompanies the document class "llncs.cls".
-%
-
+% The default list of authors is too long for headers.
+\renewcommand{\shortauthors}{J. J. Merelo et al.}
 
 \maketitle
 
@@ -67,6 +62,39 @@
 \keywords{concurrent programming, distributed evolutionary algorithms}
 \end{abstract}
 
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10003752.10003809.10003716.10011136.10011797.10011799</concept_id>
+<concept_desc>Theory of computation~Evolutionary algorithms</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+
+<concept>
+<concept_id>10010520.10010521.10010537.10003100</concept_id>
+<concept_desc>Computer systems organization~Cloud computing</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+
+<concept>
+<concept_id>10010147.10010919.10010172</concept_id>
+<concept_desc>Computing methodologies~Distributed algorithms</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Theory of computation~Evolutionary algorithms}
+
+\ccsdesc[300]{Computing methodologies~Distributed algorithms}
+
+\keywords{Microservices, distributed computing,
+  event-based systems, Kappa architecture, stateless algorithms,
+  algorithm implementation, performance evaluation, distributed
+  computing, pool-based systems, heterogeneous distributed systems,
+  serverless computing, functions as a service.}
+
+\maketitle
 
 \section{Introduction}
 
@@ -150,11 +178,18 @@ scale beyond the restrictions of the number of OS-threads.
 \section{Conclusions}
 \label{sec:conclusions}
 
-\section*{Acknowledgements}
+\begin{acks}
 
-Hidden for double-blind review
+  The author would like to acknowledge the support of grants\\
+  taking\\
+  this\\
+  much\\
+  space\\
 
-\bibliographystyle{unsrt}
+\end{acks}
+
+
+\bibliographystyle{ACM-Reference-Format}
 \bibliography{geneura,referencias,erlang-ae-model}
 
 \end{document}
