@@ -164,15 +164,15 @@ many followers. Several years ago was used in Genetic Programming
 and recently in neuroevolution \cite{Sher2013} but in GA its presence
 is practically nonexistent \cite{Hawkins:2001:GFG:872017.872197}. 
 
-This paradigm is characterized by the use of functions like first
-class concepts, and for discouraging the use of state changes. The
+This paradigm is characterized by the use of functions as first
+class concepts, and for discouraging the use of state changes, with
+functions mapping directly input to output without having any side effect. The
 latter is particularly useful for develop concurrent algorithms in
 which the communication by state changes is the origin of errors and
 complexity. Also, functional features like closures and first class
 functions in general, allow to express in one expression patterns like
 \emph{observer} which in language like Java need so many lines and
 files of source code.
-
 
 The field of programming languages research is very active in the
 Computer Science discipline. To find software construction tools with
@@ -186,7 +186,12 @@ embraced the actor model of concurrency and get excelentes results in
 many application domains; Clojure is another one with concurrent
 features such as promises/futures, Software Transaction Memory and
 agents. All of these tools have processes like built-in types and
-scale beyond the restrictions of the number of OS-threads.
+scale beyond the restrictions of the number of OS-threads. On the
+other hand, Perl 6 \cite{Tang:2007:PRI:1190215.1190218} uses different
+concurrency models, that go from implicit concurrency using a
+particular function that automatically parallelizes operations on
+iterable data structures, to explicit concurrency using threads. These
+both types of concurrency will be analyzed in this paper. 
 
 \section{Conclusions}
 \label{sec:conclusions}
