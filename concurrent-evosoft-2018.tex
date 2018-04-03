@@ -42,15 +42,14 @@ Conference 2018}{July 15--19, 2018}{Kyoto, Japan}
 }
 \email{jmerelo@ugr.es}
 
-\author{Mario García-Valdez}
+\author{José-Mario García-Valdez}
 \affiliation{%
-  \institution{Anonymous institute 2}
-  \streetaddress{P.O. Box 1212}
-  \city{Dublin}
-  \state{Ohio}
-  \postcode{43017-6221}
+  \institution{Instituto Tecnológico de Tijuana}
+  \streetaddress{Calzada Tecnológico, s/n}
+  \city{Tijuana}
+  \country{Mexico}
 }
-\email{2aa@ai2.com}
+\email{mario@tectijuana.edu.mx}
 
 % The default list of authors is too long for headers.
 \renewcommand{\shortauthors}{J. J. Merelo et al.}
@@ -118,7 +117,7 @@ improvements.
 
 New parallel platforms have been identified as new trends in pGAs \cite{Luque2011}, however only hardware is considered. Software platforms, specifically programming languages, remain poorly explored; only Ada \cite{Santos2002} and Erlang \cite{A.Bienz2011,Kerdprasop2013} were slightly tested.
 
-%The multicore’s challenge \cite{SutterL05} shows a current need for making parallel even the simplest program. But this way leads us to use and create design patterns for parallel algorithms; the conversion of a pattern into a language feature is a common practice in the programming languages domain, and sometimes that means a language modification, others the creation of a new one.
+The multicore’s challenge \cite{SutterL05} shows a current need for making parallel even the simplest program. But this way leads us to use and create design patterns for concurrent algorithms; the conversion of a pattern into a language feature is a common practice in the programming languages domain, and sometimes that means a language modification, others the creation of a new one. 
 
 This work explores the advantages of Perl6
 \cite{Tang:2007:PRI:1190216.1190218},  a relatively new and decidedly
@@ -146,7 +145,14 @@ to make a difference providing new abstraction tools outside the
 mainstream of programming languages have been proposed to pursue this
 goal; two of the most promising are the functional and the concurrent.
 
-The concurrent programming paradigm (or concurrent oriented programming \cite{Armstrong2003}) is characterized by the presence of programming constructs for managing processes like first class objects. That is, with operators for acting upon them and the possibility of using them like parameters or function's result values. This simplifies the coding of concurrent algorithms due to the direct mapping between patterns of communications and processes with language expressions.
+The concurrent programming paradigm (or concurrency oriented
+programming \cite{Armstrong2003}) is characterized by the presence of
+programming constructs for managing processes like first class
+objects. That is, with operators for acting upon them and the
+possibility of using them like parameters or function's result
+values. This simplifies the coding of concurrent algorithms due to the
+direct mapping between patterns of communications and processes with
+language expressions. 
 
 Concurrent programming is hard for many reasons, the communication/synchronization between processes is key in the design of such algorithms. One of the best efforts to formalize and simplify that is the Hoare’s {\em Communicating Sequential Processes} \cite{Hoare:1978:CSP:359576.359585}, this interaction description language is the theoretical support for many libraries and new programming languages.
 
@@ -191,18 +197,61 @@ other hand, Perl 6 \cite{Tang:2007:PRI:1190215.1190218} uses different
 concurrency models, that go from implicit concurrency using a
 particular function that automatically parallelizes operations on
 iterable data structures, to explicit concurrency using threads. These
-both types of concurrency will be analyzed in this paper. 
+both types of concurrency will be analyzed in this paper.
+
+\section{Concurrent evolutionary algorithms and its implementation}
+\label{sec:impl}
+
+The implementation of evolutionary algorithms in a concurrent
+environment must have several features:\begin{itemize}
+\item They must be {\em reactive}, that is, functions respond to
+  events, and not procedural or sequential.
+\item Functions responding to events are also first class objects and
+  are stateless, having no secondary effects. These functions have to
+  be reentrant, that is, with the capability of being run in a thread
+  without exclusion of other functions.
+\item Functions communicate with each other exclusively via channels, which can
+  hold objects of any kind but are not cached or buffered. Channels
+  can be shared, but every object can be read from a channel only
+  once.
+\end{itemize}
+
+In general, an evolutionary algorithm consists of an interative
+procedure where, after generating an initial set of individuals, these
+individuals are evaluated, and then they reproduce, with errors and
+combination of their features, with a probability
+that is proportional to their fitness. As long as there is variation
+and survival of the fittest, an evolutionary algorithm will
+work. However, the  usual way of doing this is through a series of
+nested loops, with possibly asynchronous operation in a parallel
+context when communicating with other {\em islands} or isolated
+populations. However, the concept of loop itself implies state, in the
+shape of the generation counter, or even with the population itself
+that is handled from one iteration step to the next one.
+
+Getting rid of these states, however, leads to many different
+algorithms which are not functionally equivalent to the canonical
+genetic algorithm above. Of course, a functional equivalent is also
+possible in this environment, with non-terminating {\em islands}
+running every one of them on a different thread, and communicating via
+channels. Although this version is guaranteed to succeed, we are
+looking for different implementations that, while keeping the spirit
+of the evolutionary algorithm, maps themselves better to a
+multithreaded architecture and a concurent language such as Go, Scala
+or Perl 6.
+
+This is why in this paper we are going to examine two different
+architectures. 
 
 \section{Conclusions}
 \label{sec:conclusions}
 
 \begin{acks}
 
-  The author would like to acknowledge the support of grants\\
-  taking\\
-  this\\
-  much\\
-  space\\
+  This paper has been supported in part by
+projects TIN2014-56494-C4-3-P (Spanish Ministry of Economy and
+Competitiveness) and DeepBio (TIN2017-85727-C4-2-P)
+
 
 \end{acks}
 
