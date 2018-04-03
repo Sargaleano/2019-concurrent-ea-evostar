@@ -241,7 +241,52 @@ multithreaded architecture and a concurent language such as Go, Scala
 or Perl 6.
 
 This is why in this paper we are going to examine two different
-architectures. 
+architectures, which basically differ in the granularity with which
+they perform the evolutionary algorithm.
+
+\subsection{Individual-level concurrency}
+\label{ss:indi}
+
+In this algorithm, all functions operate on single individuals or set
+of them. We are going to use three different channels:\begin{itemize}
+\item Channel {\sf individual}, which contains chromosomes without a fitness
+  function. A subchannel of this channel takes the chromosomes in groups.
+\item Channel {\sf evaluated}, which contains chromosomes paired with
+  their fitness function. This channel receives individuals one by
+  one, but emits them in pairs.
+\item Channel {\sf output}, which is used for logging what is
+  happening in the other two channels and printing output at the end
+  of the experiment.
+\end{itemize}
+
+There are two functions feeding these channels. \begin{itemize}
+  
+\item {\sf Evaluator} picks from the {\sf individual} channel,
+  evaluates a single individual and emits it to the {\sf evaluated} as
+  well as {\sf output} channel. 
+\item {\sf Reproducer} picks couples of individuals from the {\sf
+    evaluated} channel, generates a new couple using crossover, and
+  emits it to the {\sf individual} channel. 
+\item {\sf Diversifier} is a re-broadcasting of the {\sf individual
+    channel}, picks a group of individuals and shuffles it, putting it
+  back into the same channel, giving them a different order in the
+  buffer.
+\end{itemize}
+
+These functions rebroadcast when needed to other channels so that all
+channels are kept fed and a deadlock situation is not produced. This
+could happen, for instance, if the {\sf reproducer channel}, which
+takes individuals in pairs, has a single one; since it is waiting for
+a second individual it is not producing new ones and the algorithm
+will stall. 
+
+The concurrency of this situation implies that we can run as many
+copies as available of every one of them.
+
+Depending on the overhead emission and reception adds, it is possible
+that the performance of this channel is not the adequate one, even if
+theoretically it is sound. 
+
 
 \section{Conclusions}
 \label{sec:conclusions}
