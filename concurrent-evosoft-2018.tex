@@ -253,7 +253,7 @@ of them. We are going to use three different channels:\begin{itemize}
   function. A subchannel of this channel takes the chromosomes in groups.
 \item Channel {\sf evaluated}, which contains chromosomes paired with
   their fitness function. This channel receives individuals one by
-  one, but emits them in pairs.
+  one, but emits them in groups of three.
 \item Channel {\sf output}, which is used for logging what is
   happening in the other two channels and printing output at the end
   of the experiment.
@@ -264,9 +264,12 @@ There are two functions feeding these channels. \begin{itemize}
 \item {\sf Evaluator} picks from the {\sf individual} channel,
   evaluates a single individual and emits it to the {\sf evaluated} as
   well as {\sf output} channel. 
-\item {\sf Reproducer} picks couples of individuals from the {\sf
+\item {\sf Reproducer} picks three individuals from the {\sf
     evaluated} channel, generates a new couple using crossover, and
-  emits it to the {\sf individual} channel. 
+  emits it to the {\sf individual} channel. This function also acts as
+  selector, since it takes three individuals and returns only two of
+  them to the channel, along with the two individuals that have been
+  generated via crossover and mutation. 
 \item {\sf Diversifier} is a re-broadcasting of the {\sf individual
     channel}, picks a group of individuals and shuffles it, putting it
   back into the same channel, giving them a different order in the
@@ -286,7 +289,7 @@ initial process where you generate the initial population, a series of
 individuals which must be even, and bigger than the number of
 individuals used in the diversifier. This is equivalent to an initial
 population, although in this case there is no real {\em population},
-since individuals are considered in couple. 
+since individuals are considered in groups of three. 
 
 Depending on the overhead emission and reception adds, it is possible
 that the performance of this channel is not the adequate one, even if
