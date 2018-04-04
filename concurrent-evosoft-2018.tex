@@ -300,8 +300,8 @@ coarse-grained version where the function process whole populations.
 
 \subsection{Population-level concurrency}
 
-In this case, there is a single channel that emits and receives
-populations. However, this channel is also re-broadcast as a channel
+In this case, the algorithm uses a single channel that emits and receives
+populations. However, this channel is also re-broadcast as another channel
 that takes the population in pairs. Having a single channel, even is with
 different threads, will make several threads concurrently process
 populations that will evolve in complete independence. This is why
@@ -322,7 +322,65 @@ Additionally, there must be a function, which can be concurrent, to
 create the initial population. The process of migration performed by
 the mixer is needed to overcome the {\em stateless}
 nature of the concurrent process. The state is totally contained in
-the population
+the population; the mixer respects this state of affairs by using only this information to perform the evolutionary algorithm.
+
+\subsection{Notes on implementation using Perl 6}
+
+Perl 6 \cite{Tang:2007:PRI:1190215.1190218} has been chosen to perform
+the implementation of these two different versions of a concurrent
+evolutionary algorithm. This choice has been due mainly to the
+existence of an open source evolutionary algorithm library, recently
+released by the authors and called {\tt
+  Algorithm::Evolutionary::Simple}. This library, released to the
+repository of common Perl 6 modules and called CPAN, includes
+functions for the implementation of a very simple evolutionary
+algorithm for optimizing onemax, Royal Road or any other benchmark
+function.
+
+Perl 6 \cite{lenzperl} is, despite its name, a language that is
+completely different from Perl, designed for scratch to implement most
+modern language features: meta-object protocols, concurrency, and
+functional programming. It does not have a formal grammar, but is
+rather defined by the tests a compiler or interpreter must pass in
+order to be called ``Perl 6''. 
+It consists of a virtual machine and a just in
+time compiler which is written mostly in Perl 6 itself, so that it can
+be easily ported from one virtual machine to others. Although it can
+target many different virtual machines, the current ``official''
+implementation includes a virtual machine called MoarVM and a compiler
+called Rakudo. All together they compose the so-called {\em Rakudo
+  start} distribution, a {\em stable} distribution of compiler +
+virtual machine that is released every 4 monts from GitHub and to
+package repositories. 
+
+The advantage of using Perl 6 is that it combines the expressivity of
+an interpreted language with the power of concurrency. Not very many
+languages nowadays include concurrency as a base feature; Go, Scala
+and Erlang are some of them. The concurrency in Go is done in a
+similar way to Perl 6, using channels, but Go is a compiled,
+non-functional language.
+
+The main disadvantage of Perl 6 is raw performance, which is much
+slower than Go, although in general, similar although slower than
+other interpreted languages such as Python or Perl. Language
+performance is not an static feature, and it usually improves with
+time; in a separate paper, we have proved how speed has increased by
+orders of magnitude since it was released a few years ago.
+
+This paper, however, is focused on the algorithmic performance more
+than the raw performance, so suffice it to say that Perl 6 performance
+was adequate for running these experiments in a reasonable amount of
+time.
+
+The module used, as well as the code for the experiments, is available
+under a free license. 
+
+\section{Experimental setup and results}
+\label{sec:res}
+
+In order to perform the experiments, we used Linux boxes (with Ubuntu
+14.04 and 16.04), the latest version of the Perl 6 compiler and
+virtual machine. 
 
 
 \section{Conclusions}
