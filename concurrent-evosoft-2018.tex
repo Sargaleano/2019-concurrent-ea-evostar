@@ -29,8 +29,9 @@ Conference 2018}{July 15--19, 2018}{Kyoto, Japan}
 
 \begin{document}
 
-\title{Mapping evolutionary algorithms to a reactive, stateless architecture
-  using a modern concurrent language}
+\title{Mapping evolutionary algorithms to a reactive, stateless architecture}
+\subtitle{Using a modern concurrent language}
+
 
 \author{Juan J. Merelo}
 \orcid{1234-5678-9012}
@@ -133,12 +134,10 @@ and in practice.
 This research is intended to show some possible areas of improvement on architecture and engineering best practices for concurrent-functional paradigms, as was made for Object Oriented Programming languages \cite{EO:FEA2000}, by focusing on pGAs as a domain of application and describing how their principal traits can be modeled by means of concurrent-functional languages constructs. We are continuing the research reported in \cite{DBLP:conf/gecco/CruzGGC13,J.Albert-Cruz2013}.
 %other papers (hidden for double-blind review).
 
-The rest of the paper is organized as follows. Next section presents the state of the art in concurrent and functional programming language paradigms and its potential use for implementing pGAs. Our proposal to adapt pGAs to the paradigms using a study case is explained in section \ref{sec:impl} as well as the experimental results in section \ref{sec:results}. In section \ref{sec:sample} we show a sample program of canonical island/GA implemented in Scala.
-
-Finally, we draw the conclusions and future lines of work in section \ref{sec:conclusions}.
-
+The rest of the paper is organized as follows. Next section presents the state of the art in concurrent and functional programming language paradigms and its potential use for implementing pGAs. We present two different versions of a concurrent evolutionary algorithm in Section \ref{sec:impl}, to be followed by actual results in section \ref{sec:res}. Finally, we draw the conclusions and present future lines of work in section \ref{sec:conclusions}.
 
 \section{State of the Art}
+
 \noindent Developing correct software quickly and efficiently is a
 never ending goal in the software industry. Novel solutions that try
 to make a difference providing new abstraction tools outside the
@@ -246,9 +245,15 @@ they perform the evolutionary algorithm.
 
 \subsection{Individual-level concurrency}
 \label{ss:indi}
+%
+\begin{figure*}[t!bp]
+\includegraphics[width=0.95\textwidth]{channels-individual.png}
+\caption{Channels and functions used in the individual-level concurrency version of the algorithm. }
+\label{fig:indi}
+\end{figure*}
 
-In this algorithm, all functions operate on single individuals or set
-of them. We are going to use three different channels:\begin{itemize}
+
+In this version of the algorithm, all functions operate on single individuals or sets of them. We are going to use three different channels:\begin{itemize}
 \item Channel {\sf individual}, which contains chromosomes without a fitness
   function. A subchannel of this channel takes the chromosomes in groups.
 \item Channel {\sf evaluated}, which contains chromosomes paired with
@@ -261,27 +266,24 @@ of them. We are going to use three different channels:\begin{itemize}
 
 There are two functions feeding these channels. \begin{itemize}
   
-\item {\sf Evaluator} picks from the {\sf individual} channel,
-  evaluates a single individual and emits it to the {\sf evaluated} as
-  well as {\sf output} channel. 
+\item {\sf Evaluator} reacts to the {\sf individual} channel, picking and evaluating a single individual and emits it to the {\sf evaluated} as
+  well as {\sf output} channel as an object that contains the original chromosome and the computed fitness. 
 \item {\sf Reproducer} picks three individuals from the {\sf
     evaluated} channel, generates a new couple using crossover, and
   emits it to the {\sf individual} channel. This function also acts as
-  selector, since it takes three individuals and returns only two of
-  them to the channel, along with the two individuals that have been
-  generated via crossover and mutation. 
+  selector, and in fact it is similar to 3 tournament, since it takes three individuals and returns only two of them to the channel, along with the two individuals that have been generated via crossover and mutation. 
 \item {\sf Diversifier} is a re-broadcasting of the {\sf individual
     channel}, picks a group of individuals and shuffles it, putting it
   back into the same channel, giving them a different order in the
   buffer.
 \end{itemize}
 
-These functions rebroadcast when needed to other channels so that all
+How channels and functions relate to and communicate with each other is represented in Figure \ref{fig:indi}.  The functions described above rebroadcast the values they read from the cannel when needed to other channels so that all
 channels are kept fed and a deadlock situation is not produced. This
 could happen, for instance, if the {\sf reproducer channel}, which
-takes individuals in pairs, has a single one; since it is waiting for
+takes individuals in pairs, is only able to read a single one; since it is waiting for
 a second individual it is not producing new ones and the algorithm
-will stall. 
+will stall. This could be fixed in a different way by changing from a reactive architecture to a {\em polling} architecture, but that kind of architecture also introduces overhead by polling when it is not needed. You have to balance when designing these types of algorithms, anyway; polling is another possibility, but one we are not exploring in this paper. 
 
 The concurrency of this situation implies that we can run as many
 copies as available of every one of them. Also that there is an
