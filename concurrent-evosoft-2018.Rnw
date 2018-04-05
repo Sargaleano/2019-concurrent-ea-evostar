@@ -216,7 +216,7 @@ mix in which concepts of the first one had been simplified by the use
 of the second ones. 
 
 Among this new generation, the languages Erlang and Scala have
-embraced the actor model of concurrency and get excelentes results in
+embraced the actor model of concurrency and get excellent results in
 many application domains; Clojure is another one with concurrent
 features such as promises/futures, Software Transaction Memory and
 agents. All of these tools have processes like built-in types and
@@ -244,7 +244,7 @@ environment must have several features:\begin{itemize}
   once.
 \end{itemize}
 
-In general, an evolutionary algorithm consists of an interative
+In general, an evolutionary algorithm consists of an iterative
 procedure where, after generating an initial set of individuals, these
 individuals are evaluated, and then they reproduce, with errors and
 combination of their features, with a probability
@@ -265,7 +265,7 @@ running every one of them on a different thread, and communicating via
 channels. Although this version is guaranteed to succeed, we are
 looking for different implementations that, while keeping the spirit
 of the evolutionary algorithm, maps themselves better to a
-multithreaded architecture and a concurent language such as Go, Scala
+multithreaded architecture and a concurrent language such as Go, Scala
 or Perl 6.
 
 This is why in this paper we are going to examine two different
@@ -313,7 +313,7 @@ There are two functions feeding these channels. \begin{itemize}
   buffer.
 \end{itemize}
 
-How channels and functions relate to and communicate with each other is represented in Figure \ref{fig:indi}.  The functions described above rebroadcast the values they read from the cannel when needed to other channels so that all
+How channels and functions relate to and communicate with each other is represented in Figure \ref{fig:indi}.  The functions described above rebroadcast the values they read from the channel when needed to other channels so that all
 channels are kept fed and a deadlock situation is not produced. This
 could happen, for instance, if the {\sf reproducer channel}, which
 takes individuals in pairs, is only able to read a single one; since it is waiting for
@@ -362,7 +362,7 @@ this information to perform the evolutionary algorithm.
 
 This algorithm has several parameters to tune:\begin{itemize}
 \item {\bf Number of generations} that every function runs. This
-  parameter is equivalente to the time needed to perform some kind of
+  parameter is equivalent to the time needed to perform some kind of
   migration, since it is the time after which populations are sent
   back to the channel for mixing and further evolution.
 \item {\bf initial populations} The channel must never be empty, so
@@ -395,7 +395,7 @@ target many different virtual machines, the current ``official''
 implementation includes a virtual machine called MoarVM and a compiler
 called Rakudo. All together they compose the so-called {\em Rakudo
   start} distribution, a {\em stable} distribution of compiler +
-virtual machine that is released every 4 monts from GitHub and to
+virtual machine that is released every 4 months from GitHub and to
 package repositories. 
 
 The advantage of using Perl 6 is that it combines the expressivity of
@@ -452,7 +452,7 @@ that is why we use it for all implementations.
 population.initial <- data.frame(Number=population.v2$V1,Evaluations=population.v2$value)
 ggplot(population.initial,aes(x=Number,y=Evaluations,group=Number))+geom_boxplot()+theme_tufte()+labs(x="Number of initial populations",y="Evaluations",title="Comparing population-level concurrent EA for different number of initial populations")+ scale_y_log10()
 @ 
-\caption{Boxplot comparing the number of evaluations needed for solving the 64 bit onemax problem using the population-leven concurrent algorithm with different number of initial populations.}
+\caption{Boxplot comparing the number of evaluations needed for solving the 64 bit onemax problem using the population-level concurrent algorithm with different number of initial populations.}
 \label{fig:pop:initial}
 \end{figure}
 %
@@ -508,7 +508,7 @@ time. This figure is the base to reach our conclusions.
 \section{Conclusions and discussion}
 \label{sec:conclusions}
 
-It is natural to take advantage of the multithreading and multiprocess
+It is natural to take advantage of the multi-threading and multi-process
 capabilities of modern architectures to make evolutionary or other
 population-based algorithms faster; that can be done in a very
 straightforward way by parallelizing the evolutionary algorithm using
@@ -520,7 +520,7 @@ However, this change implies also a different vision of the algorithm,
 that is why the first thing that has to be evaluated is the actual
 number of evaluations that need to be done to solve the problem. This
 is what we have done in this paper. We have proposed two different
-concurrent implemtations of an evolutionary algorithms with different
+concurrent implementations of an evolutionary algorithms with different
 {\em grain}: a {\em fine-grained} one that acts at the individual
 level, and a {\em coarse-grained} one that acts at the level of populations.
 
@@ -542,7 +542,7 @@ threads.
 These results are not so much inherent to the concurrency itself as
 dependent on the selection operators that have been included in the
 concurrent version of the algorithms. The selection pressure of the
-canonical algorithm is relatively low, depending on roulete wheel. The
+canonical algorithm is relatively low, depending on roulette wheel. The
 population-level concurrent algorithm eliminates half the population
 with the worst fitness, although every generation it is running a
 canonical GA identical to the baseline; however, this exerts a high
