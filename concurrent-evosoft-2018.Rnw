@@ -357,7 +357,17 @@ Additionally, there must be a function, which can be concurrent, to
 create the initial population. The process of migration performed by
 the mixer is needed to overcome the {\em stateless}
 nature of the concurrent process. The state is totally contained in
-the population; the mixer respects this state of affairs by using only this information to perform the evolutionary algorithm.
+the population; the mixer respects this state of affairs by using only
+this information to perform the evolutionary algorithm. 
+
+This algorithm has several parameters to tune:\begin{itemize}
+\item {\bf Number of generations} that every function runs. This
+  parameter is equivalente to the time needed to perform some kind of
+  migration, since it is the time after which populations are sent
+  back to the channel for mixing and further evolution.
+\item {\bf initial populations} The channel must never be empty, so
+  some initial random populations must be generated, always in pairs.
+\end{itemize}
 
 \subsection{Notes on implementation using Perl 6}
 
@@ -439,13 +449,14 @@ that is why we use it for all implementations.
 \begin{figure}[h!tb]
   \centering
 <<comparison-mo, cache=FALSE,echo=FALSE>>=
-ggplot(comparison.64,aes(x=algorithm,y=evaluations,group=algorithm))+geom_boxplot()+theme_tufte()+labs(x="Algorithm",y="Evaluations",title="Comparing algorithms for the 64 bit onemax probmel")+ scale_y_log10()
+ggplot(comparison.64,aes(x=algorithm,y=evaluations,group=algorithm))+geom_boxplot()+theme_tufte()+labs(x="Algorithm",y="Evaluations",title="Comparing algorithms for the 64 bit onemax problem")+ scale_y_log10()
 @ 
 \caption{Boxplot comparing the number of evaluations needed for solving the 64 bit onemax problem in the individually concurrent and canonical EA version.}
 \label{fig:comparison}
 \end{figure}
+%
 First we run a basic evolutionary algorithm with different chromosome
-size, to get a baseline of the number of evaluations needed for
+sizes, to get a baseline of the number of evaluations needed for
 finding the solution in that case. Time needed was the main requisite
 for choosing the different sizes, although we think that scaling
 should follow more or less the same trend as shown for smaller
@@ -461,6 +472,9 @@ scaling prove that this simple concurrent implementation is indeed an
 evolutionary algorithm, and does not get stuck in diversity traps that
 take it to local minimum. The number of evaluations is, in fact, quite
 stable. 
+
+We did the same for the population-level concurrent algorithm;
+however, since this one has got more parameters to tune. 
 
 
 \section{Conclusions}
