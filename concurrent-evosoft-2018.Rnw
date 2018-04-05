@@ -399,7 +399,27 @@ ggplot(evaluations,aes(x=bits,y=evaluations,group=bits))+geom_boxplot()+ scale_y
 %
 In order to perform the experiments, we used Linux boxes (with Ubuntu
 14.04 and 16.04), the latest version of the Perl 6 compiler and
-virtual machine. 
+virtual machine. First we used a selecto-recombinative evolutionary
+algorithm, with no mutation, in order to find out what's the correct
+population for every problem size \cite{lobo2005review}. This method
+sizes populations looking for the minimal size that achieves a 95\%
+success rate on a particular problem and problem size; in this case,
+size 512 was the ideal for the maxones problem with size 64. This size
+was used as a base for the rest of the problem sizes; since the real
+evolutionary algorithm actually uses mutation, the population was
+halved for the actual experiments. This population size is more
+dependent on the problem itself than on the particular implementation,
+that is why we use it for all implementations. 
+
+First we run a basic evolutionary algorithm with different chromosome
+size, to get a baseline of the number of evaluations needed for
+finding the solution in that case. Time needed was the main requisite
+for choosing the different sizes, although we think that scaling
+should follow more or less the same trend as shown for smaller
+sizes. We compared mainly the number of evaluations needed, since that
+is the main measure of the quality of the algorithm.
+
+
 
 
 \section{Conclusions}
@@ -409,7 +429,7 @@ virtual machine.
 
   This paper has been supported in part by
 projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
-Competitiveness) and DeepBio (TIN2017-85727-C4-2-P)
+Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
 
 
 \end{acks}
