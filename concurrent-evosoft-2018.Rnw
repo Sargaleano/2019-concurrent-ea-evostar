@@ -448,6 +448,17 @@ that is why we use it for all implementations.
 %
 \begin{figure}[h!tb]
   \centering
+<<population-initial, cache=FALSE,echo=FALSE>>=
+population.initial <- data.frame(Number=population.v2$V1,Evaluations=population.v2$value)
+ggplot(population.initial,aes(x=Number,y=Evaluations,group=Number))+geom_boxplot()+theme_tufte()+labs(x="Number of initial populations",y="Evaluations",title="Comparing population-level concurrent EA for different number of initial populations")+ scale_y_log10()
+@ 
+\caption{Boxplot comparing the number of evaluations needed for solving the 64 bit onemax problem using the population-leven concurrent algorithm with different number of initial populations.}
+\label{fig:pop:initial}
+\end{figure}
+%
+% 
+\begin{figure}[h!tb]
+  \centering
 <<comparison-mo, cache=FALSE,echo=FALSE>>=
 ggplot(comparison.64,aes(x=algorithm,y=evaluations,group=algorithm))+geom_boxplot()+theme_tufte()+labs(x="Algorithm",y="Evaluations",title="Comparing algorithms for the 64 bit onemax problem")+ scale_y_log10()
 @ 
@@ -474,18 +485,79 @@ take it to local minimum. The number of evaluations is, in fact, quite
 stable. 
 
 We did the same for the population-level concurrent algorithm;
-however, since this one has got more parameters to tune. 
+however, since this one has got parameters to tune, we had to find a good result. In order to do that, we tested different number of initial populations placed in the channel, since this seems to be the critical parameter, more than the number of generations until mixing. The results are shown in Figure \ref{fig:pop:initial}. The difference between using 4 and 6 initial populations is virtually none, but there is a slight advantage if you use only 2 initial populations to kickstart the channel. Please bear in mind that, in this case, the concept of {\em population} is slightly different from the one used in island EAs. While in the latter the population does not move from the island, in this case populations are read from channels and acted upon, and in principle there could be as many initial or unread populations as wanted or needed; every function in every thread will process a single population nonetheless. 
 
+We can now compare these two algorithms with the baseline EA. This is
+a canonical evolutionary algorithm using bitflip mutation and
+two-point crossover, using roulette wheel as a selection method. It
+has, as the rest of the implementations of the algorithms, been
+implemented using {\tt Algorithm::Evolutionary::Simple}, the free
+software module in Perl 6. 
 
-\section{Conclusions}
+The comparison is shown in Figure
+\ref{fig:comparison}, which shows, in a logarithmic $y$ scale, a
+boxplot of the number of evaluations for the baseline, as well as the
+two different concurrent algorithms, at the population and individual
+level. As it can be seen, this last algorithm outperforms the other
+two, achieving the same result using many less evaluations, almost one
+order of magnitude less. In fact, both concurrent algorithms are
+better than the baseline, and please note this measures the number of
+evaluations, equivalent to the algorithmic complexity, and not
+time. This figure is the base to reach our conclusions.  
+
+\section{Conclusions and discussion}
 \label{sec:conclusions}
+
+It is natural to take advantage of the multithreading and multiprocess
+capabilities of modern architectures to make evolutionary or other
+population-based algorithms faster; that can be done in a very
+straightforward way by parallelizing the evolutionary algorithm using
+the many available models, such as island model; however, it is
+possible that adapting the algorithm itself to the architecture makes
+its performance better. 
+
+However, this change implies also a different vision of the algorithm,
+that is why the first thing that has to be evaluated is the actual
+number of evaluations that need to be done to solve the problem. This
+is what we have done in this paper. We have proposed two different
+concurrent implemtations of an evolutionary algorithms with different
+{\em grain}: a {\em fine-grained} one that acts at the individual
+level, and a {\em coarse-grained} one that acts at the level of populations.
+
+The individual-level concurrent EA shows a good scaling across problem
+size; besides, when comparing it with the population-level concurrent
+EA and the canonical and sequential evolutionary algorithm, it obtains
+a much better performance, being able to obtain the solution with a
+much lower evaluation budget. Second best is the population-level
+concurrent algorithm, to be followed by the baseline canonical GA,
+which obtains the worse result. This proves that, even from the purely
+algorithmic point of view, concurrent evolutionary algorithms are
+better than sequential algorithms. If we consider time, the difference
+increases, since the only sequential part of the concurrent algorithms
+is reading from the channels, but once reading has been done the rest
+of the operations can be performed concurrently, not to mention every
+function can have as many copies as needed running in different
+threads. 
+
+These results are not so much inherent to the concurrency itself as
+dependent on the selection operators that have been included in the
+concurrent version of the algorithms. The selection pressure of the
+canonical algorithm is relatively low, depending on roulete wheel. The
+population-level concurrent algorithm eliminates half the population
+with the worst fitness, although every generation it is running a
+canonical GA identical to the baseline; however, this exerts a high
+selective pressure on the population which, combined with the
+increased diversity of running two populations in parallel, results in
+better results. Same happens with the individual-level concurrent EA:
+the worst of three is always eliminated, which exerts a big pressure
+on the population, which thus is able to find the solution much
+faster. 
 
 \begin{acks}
 
   This paper has been supported in part by
 projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
 Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
-
 
 \end{acks}
 
