@@ -37,6 +37,12 @@ library(ggthemes)
 data <- read.csv('individual.csv',header=F)
 data.v2 <- melt(data,id.vars=c("V1") )
 evaluations <- data.frame(bits=data.v2$V1,evaluations=data.v2$value )
+baseline <- read.csv('baseline-ea.csv',header=F,sep=" ")
+baseline.v2 <- melt(baseline,id.vars=c("V1"))
+comparison.64 <- data.frame(bits=baseline.v2$V1,algorithm=rep('Baseline',length(baseline.v2$V1)),evaluations=baseline.v2$value)
+individual.64 <- evaluations[evaluations$bits==64,]
+comparison.64 <- rbind(comparison.64,
+                       data.frame(bits=individual.64$bits,algorithm=rep('Individual concurrency',length(individual.64$bits)),evaluations=individual.64$evaluations))
 @ 
 
 \title{Mapping evolutionary algorithms to a reactive, stateless architecture}
@@ -253,15 +259,21 @@ This is why in this paper we are going to examine two different
 architectures, which basically differ in the granularity with which
 they perform the evolutionary algorithm.
 
-\subsection{Individual-level concurrency}
-\label{ss:indi}
 %
 \begin{figure*}[t!bp]
 \includegraphics[width=0.95\textwidth]{channels-individual.png}
 \caption{Channels and functions used in the individual-level concurrency version of the algorithm. }
 \label{fig:indi}
 \end{figure*}
-
+%
+\begin{figure*}[t!bp]
+\includegraphics[width=0.95\textwidth]{population-channel.png}
+\caption{Channel and functions used in the population-level concurrency version of the algorithm. }
+\label{fig:pop}
+\end{figure*}
+%
+\subsection{Individual-level concurrency}
+\label{ss:indi}
 
 In this version of the algorithm, all functions operate on single individuals or sets of them. We are going to use three different channels:\begin{itemize}
 \item Channel {\sf individual}, which contains chromosomes without a fitness
@@ -391,7 +403,7 @@ under a free license.
 \begin{figure*}[h!tb]
   \centering
 <<results-mo, cache=FALSE,echo=FALSE>>=
-ggplot(evaluations,aes(x=bits,y=evaluations,group=bits))+geom_boxplot()+ scale_y_log10()+theme_tufte()+labs(x="Bits",y="Evaluations",title="Concurrent individually concurrent evolutionary algorithm")
+ggplot(evaluations,aes(x=bits,y=evaluations,group=bits))+geom_boxplot()+ scale_y_log10()+theme_tufte()+labs(x="Bits",y="Evaluations",title="Individually concurrent evolutionary algorithm")
 @ 
 \caption{Boxplot of the number of evaluations needed for different number of bits in the maxones problem. Please note that axes $x$ and $y$ both have a logarithmic scale.}
 \label{fig:evals:mo}
@@ -410,7 +422,15 @@ evolutionary algorithm actually uses mutation, the population was
 halved for the actual experiments. This population size is more
 dependent on the problem itself than on the particular implementation,
 that is why we use it for all implementations. 
-
+%
+\begin{figure}[h!tb]
+  \centering
+<<comparison-mo, cache=FALSE,echo=FALSE>>=
+ggplot(comparison.64,aes(x=bits,y=evaluations,group=algorithm))+geom_boxplot()+theme_tufte()+labs(x="Bits",y="Evaluations",title="Concurrent individually concurrent evolutionary algorithm")
+@ 
+\caption{Boxplot comparing the number of evaluations needed for }
+\label{fig:comparison}
+\end{figure}
 First we run a basic evolutionary algorithm with different chromosome
 size, to get a baseline of the number of evaluations needed for
 finding the solution in that case. Time needed was the main requisite
