@@ -419,7 +419,15 @@ should follow more or less the same trend as shown for smaller
 sizes. We compared mainly the number of evaluations needed, since that
 is the main measure of the quality of the algorithm.
 
-
+We show in Figure \ref{fig:evals:mo} the logarithmic chart  of the
+number of evaluations that are reached for different, logarithmically
+growing, chromosome sizes using the individually concurrent
+evolutionary algorithm. There is a logical increase in the number of
+evaluations needed, but the fact that it is a low number and its
+scaling prove that this simple concurrent implementation is indeed an
+evolutionary algorithm, and does not get stuck in diversity traps that
+take it to local minimum. The number of evaluations is, in fact, quite
+stable. 
 
 
 \section{Conclusions}
