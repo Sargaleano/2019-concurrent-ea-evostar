@@ -551,7 +551,40 @@ increased diversity of running two populations in parallel, results in
 better results. Same happens with the individual-level concurrent EA:
 the worst of three is always eliminated, which exerts a big pressure
 on the population, which thus is able to find the solution much
-faster. 
+faster. Nothing prevents us from using these same mechanisms in an
+evolutionary algorithm, which would then be functionally equivalent to
+these concurrent algorithms, but we wanted to compare a canonical EA
+to {\em canonical} concurrent evolutionary algorithms, at the same
+time we compare different versions of them; in this sense, it is
+better to use this individual-level concurrent algorithm in future
+versions of the evolutionary algorithm library. 
+
+The main conclusion of this paper is that evolutionary algorithms can
+benefit from concurrent implementations, and that these should be as
+fine grained as possible. However, a lot of work remains to be
+done. One line of research will be to try and use the implicitly
+concurrent capabilities of Perl 6 to perform multi-threaded evaluation
+or any other part of the algorithm, which would delegate the use of
+the threading facilities to the compiler and virtual machine. That
+will have no implications on the number of evaluations, but will help
+make the overall application faster. 
+
+Of course, time comparisons will also have to be made, as well as a
+more thorough exploration of the parameter space of the
+population-level evolutionary algorithm. Since this type of algorithm
+has a lower overhead, communicating via channels with lower frequency,
+it could be faster than the individual-level concurrent EA. Measuring
+the scaling with the number of thread is also an interesting line to
+pursue; since our architecture is using single channels, this might
+eventually be a bottleneck, and will prevent scaling to an indefinite
+number of threads. However, that number might be higher than the
+available number of threads in a desktop processor, so it has to be
+measured in practice. 
+
+Finally, we would like to remark that this paper is part of the open
+science effort by the authors. It is hosted in GitHub, and the paper
+repository hosts the data and scripts used to process them, which are
+in fact embedded in this paper source code using Knitr \cite{xie2013knitr}. 
 
 \begin{acks}
 
