@@ -12,9 +12,9 @@
    viewBox="96 330 886 495"
    width="886pt"
    height="495pt"
-   id="svg4647"
+   id="svg2"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="channels-individual.svg">
+   sodipodi:docname="channels-population.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -26,7 +26,7 @@
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
      inkscape:window-height="997"
-     id="namedview4856"
+     id="namedview211"
      showgrid="false"
      inkscape:zoom="1.2216704"
      inkscape:cx="553.75"
@@ -34,20 +34,21 @@
      inkscape:window-x="0"
      inkscape:window-y="34"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4647" />
+     inkscape:current-layer="svg2" />
   <metadata
-     id="metadata4649"> Produced by OmniGraffle 6.6.2 <dc:date>2018-04-05 04:40:14 +0000</dc:date>
+     id="metadata4"> Produced by OmniGraffle 6.6.2 <dc:date>2018-04-05 04:40:14 +0000</dc:date>
 <rdf:RDF>
   <cc:Work
      rdf:about="">
     <dc:format>image/svg+xml</dc:format>
     <dc:type
        rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title></dc:title>
   </cc:Work>
 </rdf:RDF>
 </metadata>
   <defs
-     id="defs4651">
+     id="defs6">
     <filter
        id="Shadow"
        filterUnits="userSpaceOnUse">
@@ -55,23 +56,23 @@
          in="SourceAlpha"
          result="blur"
          stdDeviation="1.308"
-         id="feGaussianBlur4654" />
+         id="feGaussianBlur9" />
       <feOffset
          in="blur"
          result="offset"
          dx="0"
          dy="2"
-         id="feOffset4656" />
+         id="feOffset11" />
       <feFlood
          flood-color="black"
          flood-opacity=".5"
          result="flood"
-         id="feFlood4658" />
+         id="feFlood13" />
       <feComposite
          in="flood"
          in2="offset"
          operator="in"
-         id="feComposite4660" />
+         id="feComposite15" />
     </filter>
     <font-face
        font-family="Helvetica"
@@ -85,7 +86,7 @@
        ascent="770.01953"
        descent="-229.98047"
        font-weight="500"
-       id="font-face4662">
+       id="font-face17">
       <font-face-src>
         <font-face-name
            name="Helvetica" />
@@ -104,7 +105,7 @@
        ascent="951.99585"
        descent="-212.99744"
        font-weight="500"
-       id="font-face4664">
+       id="font-face19">
       <font-face-src>
         <font-face-name
            name="HelveticaNeue" />
@@ -122,7 +123,7 @@
        ascent="770.01953"
        descent="-229.98047"
        font-weight="bold"
-       id="font-face4666">
+       id="font-face21">
       <font-face-src>
         <font-face-name
            name="Helvetica-Bold" />
@@ -140,7 +141,7 @@
        ascent="770.01953"
        descent="-229.98047"
        font-weight="500"
-       id="font-face4668">
+       id="font-face23">
       <font-face-src>
         <font-face-name
            name="Helvetica" />
@@ -156,13 +157,13 @@
        markerHeight="8"
        color="#666">
       <g
-         id="g4671">
+         id="g26">
         <path
            d="M 8 0 L 0 0 M 0 -3 L 8 0 L 0 3"
            fill="none"
            stroke="currentColor"
            stroke-width="1"
-           id="path4673" />
+           id="path28" />
       </g>
     </marker>
   </defs>
@@ -172,20 +173,20 @@
      stroke-dasharray="none"
      fill="none"
      fill-opacity="1"
-     id="g4675">
+     id="g30">
     <title
-       id="title4677">Canvas 1</title>
+       id="title32">Canvas 1</title>
     <rect
        fill="white"
        width="1155"
        height="1566"
-       id="rect4679" />
+       id="rect34" />
     <g
-       id="g4681">
+       id="g36">
       <title
-         id="title4683">Layer 1</title>
+         id="title38">Layer 1</title>
       <g
-         id="g4685">
+         id="g40">
         <xlink:use
            xlink:href="#id19_Graphic"
            filter="url(#Shadow)" />
@@ -217,7 +218,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="2"
-         id="rect4687" />
+         id="rect42" />
       <rect
          x="102.047243"
          y="388.34645"
@@ -227,7 +228,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="2"
-         id="rect4689" />
+         id="rect44" />
       <g
          id="id19_Graphic">
         <rect
@@ -236,11 +237,11 @@
            width="104.88189"
            height="36.870558"
            fill="#99c"
-           id="rect4692" />
+           id="rect47" />
         <text
            transform="translate(564.84252 425.21087)"
            fill="white"
-           id="text4694">
+           id="text49">
           <tspan
              font-family="Helvetica"
              font-size="14"
@@ -249,13 +250,13 @@
              x="17.868679"
              y="14"
              textLength="59.14453"
-             id="tspan4696">Evaluator</tspan>
+             id="tspan51">Evaluator</tspan>
         </text>
       </g>
       <text
          transform="translate(101.377954 364.01275)"
          fill="black"
-         id="text4698">
+         id="text53">
         <tspan
            font-family="Helvetica Neue"
            font-size="16"
@@ -263,7 +264,7 @@
            x="0"
            y="15"
            textLength="67.568"
-           id="tspan4700">individual</tspan>
+           id="tspan55">individual</tspan>
       </text>
       <rect
          x="670.3937"
@@ -274,11 +275,11 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="2"
-         id="rect4702" />
+         id="rect57" />
       <text
          transform="translate(509.56693 473.60225)"
          fill="black"
-         id="text4704">
+         id="text59">
         <tspan
            font-family="Helvetica Neue"
            font-size="16"
@@ -286,20 +287,20 @@
            x="0"
            y="15"
            textLength="69.344"
-           id="tspan4706">evaluated</tspan>
+           id="tspan61">evaluated</tspan>
       </text>
       <text
-         transform="translate(672.55906,596.90933)"
-         id="text4708"
-         style="fill:#000000">
+         transform="translate(672.55906 596.90933)"
+         fill="black"
+         id="text63">
         <tspan
+           font-family="Helvetica Neue"
            font-size="16"
            font-weight="500"
            x="0"
            y="15"
            textLength="62.56"
-           id="tspan4710"
-           style="font-weight:500;font-size:16px;font-family:'Helvetica Neue'">emitted</tspan>
+           id="tspan65">emmited</tspan>
       </text>
       <rect
          x="379.84252"
@@ -307,11 +308,11 @@
          width="90"
          height="36"
          fill="#69f"
-         id="rect4712" />
+         id="rect67" />
       <text
          transform="translate(384.84252 419.18897)"
          fill="white"
-         id="text4714">
+         id="text69">
         <tspan
            font-family="Helvetica"
            font-size="12"
@@ -320,7 +321,7 @@
            x="11.998047"
            y="11"
            textLength="56.003906"
-           id="tspan4716">individual</tspan>
+           id="tspan71">individual</tspan>
       </text>
       <rect
          x="469.84252"
@@ -328,18 +329,18 @@
          width="28.488189"
          height="18"
          fill="#99c"
-         id="rect4718" />
+         id="rect73" />
       <rect
          x="249.44882"
          y="408.18897"
          width="90"
          height="36"
          fill="#69f"
-         id="rect4720" />
+         id="rect75" />
       <text
          transform="translate(254.44882 419.18897)"
          fill="white"
-         id="text4722">
+         id="text77">
         <tspan
            font-family="Helvetica"
            font-size="12"
@@ -348,7 +349,7 @@
            x="11.998047"
            y="11"
            textLength="56.003906"
-           id="tspan4724">individual</tspan>
+           id="tspan79">individual</tspan>
       </text>
       <rect
          x="339.44882"
@@ -356,18 +357,18 @@
          width="28.488189"
          height="18"
          fill="#99c"
-         id="rect4726" />
+         id="rect81" />
       <rect
          x="116.7874"
          y="408.18897"
          width="90"
          height="36"
          fill="#69f"
-         id="rect4728" />
+         id="rect83" />
       <text
          transform="translate(121.7874 419.18897)"
          fill="white"
-         id="text4730">
+         id="text85">
         <tspan
            font-family="Helvetica"
            font-size="12"
@@ -376,7 +377,7 @@
            x="11.998047"
            y="11"
            textLength="56.003906"
-           id="tspan4732">individual</tspan>
+           id="tspan87">individual</tspan>
       </text>
       <rect
          x="206.7874"
@@ -384,18 +385,18 @@
          width="28.488189"
          height="18"
          fill="#99c"
-         id="rect4734" />
+         id="rect89" />
       <rect
          x="653.38583"
          y="513.49607"
          width="90"
          height="36"
          fill="#69f"
-         id="rect4736" />
+         id="rect91" />
       <text
          transform="translate(658.38583 524.49607)"
          fill="white"
-         id="text4738">
+         id="text93">
         <tspan
            font-family="Helvetica"
            font-size="12"
@@ -404,7 +405,7 @@
            x="11.998047"
            y="11"
            textLength="56.003906"
-           id="tspan4740">individual</tspan>
+           id="tspan95">individual</tspan>
       </text>
       <rect
          x="743.38583"
@@ -412,11 +413,11 @@
          width="28.488189"
          height="18"
          fill="#99c"
-         id="rect4742" />
+         id="rect97" />
       <text
          transform="translate(748.38583 522.27207)"
          fill="white"
-         id="text4744">
+         id="text99">
         <tspan
            font-family="Helvetica Neue"
            font-size="16"
@@ -425,7 +426,7 @@
            x="6.8760946"
            y="15"
            textLength="4.736"
-           id="tspan4746">f</tspan>
+           id="tspan101">f</tspan>
       </text>
       <rect
          x="518.2559"
@@ -433,11 +434,11 @@
          width="90"
          height="36"
          fill="#69f"
-         id="rect4748" />
+         id="rect103" />
       <text
          transform="translate(523.2559 524.49607)"
          fill="white"
-         id="text4750">
+         id="text105">
         <tspan
            font-family="Helvetica"
            font-size="12"
@@ -446,7 +447,7 @@
            x="11.998047"
            y="11"
            textLength="56.003906"
-           id="tspan4752">individual</tspan>
+           id="tspan107">individual</tspan>
       </text>
       <rect
          x="608.2559"
@@ -454,11 +455,11 @@
          width="28.488189"
          height="18"
          fill="#99c"
-         id="rect4754" />
+         id="rect109" />
       <text
          transform="translate(613.2559 522.27207)"
          fill="white"
-         id="text4756">
+         id="text111">
         <tspan
            font-family="Helvetica Neue"
            font-size="16"
@@ -467,7 +468,7 @@
            x="6.8760946"
            y="15"
            textLength="4.736"
-           id="tspan4758">f</tspan>
+           id="tspan113">f</tspan>
       </text>
       <rect
          x="828.66143"
@@ -475,7 +476,7 @@
          width="120"
          height="59.52756"
          fill="#e6e6e6"
-         id="rect4760" />
+         id="rect115" />
       <rect
          x="828.66143"
          y="625.03937"
@@ -485,42 +486,42 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="rect4762" />
+         id="rect117" />
       <rect
          x="846.6142"
          y="645.73228"
          width="23.68421"
          height="21.826772"
          fill="#69f"
-         id="rect4764" />
+         id="rect119" />
       <rect
          x="870.2984"
          y="651.18897"
          width="7.496892"
          height="10.913386"
          fill="#99c"
-         id="rect4766" />
+         id="rect121" />
       <rect
          x="891.9685"
          y="645.73228"
          width="23.68421"
          height="21.826772"
          fill="#69f"
-         id="rect4768" />
+         id="rect123" />
       <rect
          x="915.65273"
          y="651.18897"
          width="7.496892"
          height="10.913386"
          fill="#99c"
-         id="rect4770" />
+         id="rect125" />
       <rect
          x="687.4016"
          y="625.03937"
          width="120"
          height="59.52756"
          fill="#e6e6e6"
-         id="rect4772" />
+         id="rect127" />
       <rect
          x="687.4016"
          y="625.03937"
@@ -530,35 +531,35 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="rect4774" />
+         id="rect129" />
       <rect
          x="705.35434"
          y="645.73228"
          width="23.68421"
          height="21.826772"
          fill="#69f"
-         id="rect4776" />
+         id="rect131" />
       <rect
          x="729.03855"
          y="651.18897"
          width="7.496892"
          height="10.913386"
          fill="#99c"
-         id="rect4778" />
+         id="rect133" />
       <rect
          x="750.70867"
          y="645.73228"
          width="23.68421"
          height="21.826772"
          fill="#69f"
-         id="rect4780" />
+         id="rect135" />
       <rect
          x="774.3929"
          y="651.18897"
          width="7.496892"
          height="10.913386"
          fill="#99c"
-         id="rect4782" />
+         id="rect137" />
       <rect
          x="110.55118"
          y="748.34646"
@@ -568,7 +569,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="2"
-         id="rect4784" />
+         id="rect139" />
       <g
          id="id41351_Graphic">
         <rect
@@ -577,18 +578,18 @@
            width="83.586573"
            height="29.942544"
            fill="white"
-           id="rect4787" />
+           id="rect142" />
         <path
            d="M 432.31894 770.2256 L 515.9055 770.2256 L 515.9055 800.16813 L 432.31894 800.16813 Z M 440.6776 770.2256 L 440.6776 800.16813 M 507.54685 800.16813 L 507.54685 770.2256"
            stroke="#666"
            stroke-linecap="round"
            stroke-linejoin="round"
            stroke-width="1"
-           id="path4789" />
+           id="path144" />
         <text
            transform="translate(445.6776 779.19686)"
            fill="#666"
-           id="text4791">
+           id="text146">
           <tspan
              font-family="Helvetica"
              font-size="10"
@@ -597,7 +598,7 @@
              x="9.2573833"
              y="10"
              textLength="38.354492"
-             id="tspan4793">log entry</tspan>
+             id="tspan148">log entry</tspan>
         </text>
       </g>
       <g
@@ -608,18 +609,18 @@
            width="83.586573"
            height="29.942544"
            fill="white"
-           id="rect4796" />
+           id="rect151" />
         <path
            d="M 229.6063 770.2256 L 313.19287 770.2256 L 313.19287 800.16813 L 229.6063 800.16813 Z M 237.96496 770.2256 L 237.96496 800.16813 M 304.83422 800.16813 L 304.83422 770.2256"
            stroke="#666"
            stroke-linecap="round"
            stroke-linejoin="round"
            stroke-width="1"
-           id="path4798" />
+           id="path153" />
         <text
            transform="translate(242.96496 779.19686)"
            fill="#666"
-           id="text4800">
+           id="text155">
           <tspan
              font-family="Helvetica"
              font-size="10"
@@ -628,7 +629,7 @@
              x="9.2573833"
              y="10"
              textLength="38.354492"
-             id="tspan4802">log entry</tspan>
+             id="tspan157">log entry</tspan>
         </text>
       </g>
       <g
@@ -639,18 +640,18 @@
            width="83.586573"
            height="29.942544"
            fill="white"
-           id="rect4805" />
+           id="rect160" />
         <path
            d="M 334.4882 770.2256 L 418.07477 770.2256 L 418.07477 800.16813 L 334.4882 800.16813 Z M 342.84685 770.2256 L 342.84685 800.16813 M 409.7161 800.16813 L 409.7161 770.2256"
            stroke="#666"
            stroke-linecap="round"
            stroke-linejoin="round"
            stroke-width="1"
-           id="path4807" />
+           id="path162" />
         <text
            transform="translate(347.84685 779.19686)"
            fill="#666"
-           id="text4809">
+           id="text164">
           <tspan
              font-family="Helvetica"
              font-size="10"
@@ -659,7 +660,7 @@
              x="9.2573833"
              y="10"
              textLength="38.354492"
-             id="tspan4811">log entry</tspan>
+             id="tspan166">log entry</tspan>
         </text>
       </g>
       <g
@@ -670,18 +671,18 @@
            width="83.586573"
            height="29.942544"
            fill="white"
-           id="rect4814" />
+           id="rect169" />
         <path
            d="M 124.72441 770.2256 L 208.31098 770.2256 L 208.31098 800.16813 L 124.72441 800.16813 Z M 133.08307 770.2256 L 133.08307 800.16813 M 199.95233 800.16813 L 199.95233 770.2256"
            stroke="#666"
            stroke-linecap="round"
            stroke-linejoin="round"
            stroke-width="1"
-           id="path4816" />
+           id="path171" />
         <text
            transform="translate(138.08307 779.19686)"
            fill="#666"
-           id="text4818">
+           id="text173">
           <tspan
              font-family="Helvetica"
              font-size="10"
@@ -690,7 +691,7 @@
              x="9.2573833"
              y="10"
              textLength="38.354492"
-             id="tspan4820">log entry</tspan>
+             id="tspan175">log entry</tspan>
         </text>
       </g>
       <g
@@ -701,11 +702,11 @@
            width="104.88189"
            height="36.870558"
            fill="#99c"
-           id="rect4823" />
+           id="rect178" />
         <text
            transform="translate(431.61418 646.30315)"
            fill="white"
-           id="text4825">
+           id="text180">
           <tspan
              font-family="Helvetica"
              font-size="14"
@@ -714,7 +715,7 @@
              x="10.865261"
              y="14"
              textLength="73.151367"
-             id="tspan4827">Reproducer</tspan>
+             id="tspan182">Reproducer</tspan>
         </text>
       </g>
       <g
@@ -725,11 +726,11 @@
            width="104.88189"
            height="36.870558"
            fill="#99c"
-           id="rect4830" />
+           id="rect185" />
         <text
            transform="translate(516.65355 340.1715)"
            fill="white"
-           id="text4832">
+           id="text187">
           <tspan
              font-family="Helvetica"
              font-size="14"
@@ -738,7 +739,7 @@
              x="16.327175"
              y="14"
              textLength="49.779297"
-             id="tspan4834">Diversifi</tspan>
+             id="tspan189">Diversifi</tspan>
           <tspan
              font-family="Helvetica"
              font-size="14"
@@ -747,7 +748,7 @@
              x="66.10647"
              y="14"
              textLength="12.448242"
-             id="tspan4836">er</tspan>
+             id="tspan191">er</tspan>
         </text>
       </g>
       <line
@@ -760,7 +761,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="line4838" />
+         id="line193" />
       <path
          d="M 792.28347 534 L 834.66667 534 L 834.87156 608.0528"
          marker-end="url(#StickArrow_Marker)"
@@ -768,7 +769,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="path4840" />
+         id="path195" />
       <line
          x1="612.28347"
          y1="452.14615"
@@ -779,7 +780,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="line4842" />
+         id="line197" />
       <path
          d="M 426.61418 654.80315 L 208.31098 654 L 208.31098 471.9"
          marker-end="url(#StickArrow_Marker)"
@@ -787,11 +788,11 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="path4844" />
+         id="path199" />
       <text
          transform="translate(121.7874 722.12467)"
          fill="black"
-         id="text4846">
+         id="text201">
         <tspan
            font-family="Helvetica Neue"
            font-size="16"
@@ -799,7 +800,7 @@
            x="0"
            y="15"
            textLength="46.544"
-           id="tspan4848">output</tspan>
+           id="tspan203">output</tspan>
       </text>
       <line
          x1="670.3937"
@@ -811,7 +812,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="line4850" />
+         id="line205" />
       <path
          d="M 516.25968 408.3099 L 564.35417 407.8322 L 564.1576 377.00658"
          marker-end="url(#StickArrow_Marker)"
@@ -819,7 +820,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="path4852" />
+         id="path207" />
       <path
          d="M 511.65355 348.6715 L 379.84252 348 L 379.84252 380.76667"
          marker-end="url(#StickArrow_Marker)"
@@ -827,7 +828,7 @@
          stroke-linecap="round"
          stroke-linejoin="round"
          stroke-width="1"
-         id="path4854" />
+         id="path209" />
     </g>
   </g>
 </svg>
