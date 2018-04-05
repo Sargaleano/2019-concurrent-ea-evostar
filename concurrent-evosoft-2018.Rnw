@@ -85,7 +85,7 @@ comparison.64 <- rbind(comparison.64,
 \renewcommand{\shortauthors}{J. J. Merelo et al.}
 
 \begin{abstract}
-\keywords{concurrent programming, distributed evolutionary algorithms}
+Modern computer architectures allow the concurrent operations of many different threads that can process information and implement algorithms in parallel. At the same time, modern computer languages such as Perl 6, Go, Erlang or Scala present convenient abstractions to use these capabilities. Although a straightforward translation of sequential algorithms to a concurrent architecture is possible, moving these algorithms to a different level of abstraction using language-provided facilities allows more insight into the algorithmic process, at the same time it might offer better computation time. In this paper we evaluate several different concurrent implementations of evolutionary algorithms using Perl 6, and find that they offer algorithmic performance that is better than canonical evolutionary algorithms. 
 \end{abstract}
 
 \begin{CCSXML}
@@ -114,7 +114,7 @@ comparison.64 <- rbind(comparison.64,
 
 \ccsdesc[300]{Computing methodologies~Distributed algorithms}
 
-\keywords{Microservices, distributed computing,
+\keywords{Concurrent algorithms, distributed computing,
   event-based systems, Kappa architecture, stateless algorithms,
   algorithm implementation, performance evaluation, distributed
   computing, pool-based systems, heterogeneous distributed systems,
