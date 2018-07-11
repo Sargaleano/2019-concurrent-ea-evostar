@@ -8,15 +8,6 @@
 \usepackage{rotating}
 \definecolor{Gray}{gray}{0.6}
 
-\copyrightyear{2018}
-\acmYear{2018}
-\setcopyright{acmlicensed}
-\acmConference[GECCO '18 Companion]{Genetic and Evolutionary Computation Conference Companion}{July 15--19, 2018}{Kyoto, Japan}
-\acmBooktitle{GECCO '18 Companion: Genetic and Evolutionary Computation Conference Companion, July 15--19, 2018, Kyoto, Japan}
-\acmPrice{15.00}
-\acmDOI{10.1145/3205651.3208317}
-\acmISBN{978-1-4503-5764-7/18/07}
-
 \acmArticle{4}
 \acmPrice{15.00}
 
@@ -51,9 +42,7 @@ comparison.64 <- rbind(comparison.64,
 
 @ 
 
-\title{Mapping evolutionary algorithms to a reactive, stateless architecture}
-\subtitle{Using a modern concurrent language}
-
+\title{Going stateless in concurrent evolutionary algorithms}
 
 \author{Juan J. Merelo}
 \orcid{1234-5678-9012}
@@ -78,34 +67,9 @@ comparison.64 <- rbind(comparison.64,
 \renewcommand{\shortauthors}{J. J. Merelo et al.}
 
 \begin{abstract}
-Modern computer architectures allow the concurrent operations of many different threads that can process information and implement algorithms in parallel. At the same time, modern computer languages such as Perl 6, Go, Erlang or Scala present convenient abstractions to use these capabilities. Although a straightforward translation of sequential algorithms to a concurrent architecture is possible, moving these algorithms to a different level of abstraction using language-provided facilities allows more insight into the algorithmic process, at the same time it might offer better computation time. In this paper we evaluate several different concurrent implementations of evolutionary algorithms using Perl 6, and find that they offer algorithmic performance that is better than canonical evolutionary algorithms. 
+Concurrent languages such as Perl 6 fully leverage the power of current multi-core and hyper-threaded computer architectures. However, algorithms have to be redesigned in order to take full advantage of the concurrent abstraction; in particular, the use of a reactive pattern needs the algorithm to be stateless, with simple functions that receive all the context and map it to outputs. In this paper we are going to analyze different versions of these stateless, reactive architectures applied to evolutionary algorithms, assessing how they interact with the characteristics of the evolutionary algorithm itself to give a good scaling behavior and performance.
 \end{abstract}
 
-\begin{CCSXML}
-<ccs2012>
-<concept>
-<concept_id>10003752.10003809.10003716.10011136.10011797.10011799</concept_id>
-<concept_desc>Theory of computation~Evolutionary algorithms</concept_desc>
-<concept_significance>500</concept_significance>
-</concept>
-
-<concept>
-<concept_id>10010520.10010521.10010537.10003100</concept_id>
-<concept_desc>Computer systems organization~Cloud computing</concept_desc>
-<concept_significance>500</concept_significance>
-</concept>
-
-<concept>
-<concept_id>10010147.10010919.10010172</concept_id>
-<concept_desc>Computing methodologies~Distributed algorithms</concept_desc>
-<concept_significance>300</concept_significance>
-</concept>
-</ccs2012>
-\end{CCSXML}
-
-\ccsdesc[500]{Theory of computation~Evolutionary algorithms}
-
-\ccsdesc[300]{Computing methodologies~Distributed algorithms}
 
 \keywords{Concurrent algorithms, distributed computing,
   event-based systems, Kappa architecture, stateless algorithms,
