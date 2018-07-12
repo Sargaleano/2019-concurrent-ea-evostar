@@ -334,7 +334,7 @@ evolutionary algorithm. This choice has been due mainly to the
 existence of an open source evolutionary algorithm library, recently
 released by the authors and called {\tt
   Algorithm::Evolutionary::Simple}. This library, released to the
-repository of common Perl 6 modules and called CPAN, includes
+repository of Perl 6 modules, called CPAN, includes
 functions for the implementation of a very simple evolutionary
 algorithm for optimizing onemax, Royal Road or any other benchmark
 function.
@@ -345,29 +345,27 @@ modern language features: meta-object protocols, concurrency, and
 functional programming. It does not have a formal grammar, but is
 rather defined by the tests a compiler or interpreter must pass in
 order to be called ``Perl 6''. 
-It consists of a virtual machine and a just in
-time compiler which is written mostly in Perl 6 itself, so that it can
-be easily ported from one virtual machine to others. Although it can
-target many different virtual machines, the current ``official''
-implementation includes a virtual machine called MoarVM and a compiler
-called Rakudo. All together they compose the so-called {\em Rakudo
-  start} distribution, a {\em stable} distribution of compiler +
+Current implementation consists of a virtual machine with just in
+time capabilities, called MoarVM, and a compiler (Rakudo) which is written mostly in Perl 6 itself, so that it can
+be easily ported from one virtual machine to others; the rest is written in a simple language called NQP (Not Quite Perl). All together they compose the so-called {\em Rakudo
+  star} distribution, a {\em stable} distribution of compiler +
 virtual machine that is released every 4 months from GitHub and to
-package repositories. 
+package repositories. Right now the Java Virtual Machine is a few features behind MoarVM, and there is a new virtual machine in the works which is based on JavaScript.
 
-The advantage of using Perl 6 is that it combines the expressivity of
+The advantage of using Perl 6 for this work is that it combines the expressivity of
 an interpreted language with the power of concurrency. Not very many
 languages nowadays include concurrency as a base feature; Go, Scala
-and Erlang are some of them. The concurrency in Go is done in a
+and Erlang are some of them. % add references - JJ
+The concurrency in Go is done in a
 similar way to Perl 6, using channels, but Go is a compiled,
-non-functional language.
+non-functional language. % What about the others? - JJ
 
-The main disadvantage of Perl 6 is raw performance, which is much
-slower than Go, although in general, similar although slower than
+The main disadvantage of Perl 6 is currently its raw performance, which is much
+slower than Go or Java, although in general, similar although slower than
 other interpreted languages such as Python or Perl. Language
 performance is not an static feature, and it usually improves with
 time; in a separate paper, we have proved how speed has increased by
-orders of magnitude since it was released a few years ago.
+orders of magnitude since it was released a few years ago. % Cite the other paper - JJ
 
 This paper, however, is focused on the algorithmic performance more
 than the raw performance, so suffice it to say that Perl 6 performance
