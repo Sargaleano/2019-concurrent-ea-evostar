@@ -1,15 +1,12 @@
-\documentclass[sigconf]{acmart}
+\documentclass[runningheads]{llncs}
+
 %%% Local Variables:
 %%% ispell-local-dictionary: "english"
 %%% End:
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs} % For formal tables
 \usepackage{graphicx}
-\usepackage{rotating}
-\definecolor{Gray}{gray}{0.6}
 
-\acmArticle{4}
-\acmPrice{15.00}
 
 \begin{document}
 
@@ -44,40 +41,42 @@ comparison.64 <- rbind(comparison.64,
 
 \title{Going stateless in concurrent evolutionary algorithms}
 
-\author{Juan J. Merelo}
-\orcid{1234-5678-9012}
-\affiliation{%
-  \institution{Universidad de Granada}
-  \streetaddress{Daniel Saucedo Aranda, s/n}
-  \city{Granada}
-  \country{Spain}
-}
-\email{jmerelo@ugr.es}
+\author{Juan J. Merelo\inst{1}
+\and
+José-Mario García-Valdez\inst{2}}
 
-\author{José-Mario García-Valdez}
-\affiliation{%
-  \institution{Instituto Tecnológico de Tijuana}
-  \streetaddress{Calzada Tecnológico, s/n}
-  \city{Tijuana}
-  \country{Mexico}
-}
+\institute{%
+  Universidad de Granada/CITIC\\
+  Granada, Spain\\
+  \email{jmerelo@ugr.es}\\
+\and
+Instituto Tecnológico de Tijuana\\
+Calzada Tecnológico, s/n\\
+Tijuana\\
+Mexico\\
 \email{mario@tectijuana.edu.mx}
+}
 
-% The default list of authors is too long for headers.
-\renewcommand{\shortauthors}{J. J. Merelo et al.}
+\maketitle
+
 
 \begin{abstract}
-Concurrent languages such as Perl 6 fully leverage the power of current multi-core and hyper-threaded computer architectures. However, algorithms have to be redesigned in order to take full advantage of the concurrent abstraction; in particular, the use of a reactive pattern needs the algorithm to be stateless, with simple functions that receive all the context and map it to outputs. In this paper we are going to analyze different versions of these stateless, reactive architectures applied to evolutionary algorithms, assessing how they interact with the characteristics of the evolutionary algorithm itself to give a good scaling behavior and performance.
+Concurrent languages such as Perl 6 fully leverage the power of
+current multi-core and hyper-threaded computer architectures. However,
+algorithms have to be redesigned in order to take full advantage of
+the concurrent abstraction; in particular, the use of a reactive
+pattern needs the algorithm to be stateless, with simple functions
+that receive all the context and map it to outputs. In this paper we
+are going to analyze different versions of these stateless, reactive
+architectures applied to evolutionary algorithms, assessing how they
+interact with the characteristics of the evolutionary algorithm itself
+to give a good scaling behavior and performance.
+
+\keywords{Concurrent algorithms,distributed computing,stateless algorithms, algorithm implementation,performance evaluation,distributed computing,heterogeneous distributed systems.}
 \end{abstract}
 
 
-\keywords{Concurrent algorithms, distributed computing,
-  event-based systems, Kappa architecture, stateless algorithms,
-  algorithm implementation, performance evaluation, distributed
-  computing, pool-based systems, heterogeneous distributed systems,
-  serverless computing, functions as a service.}
 
-\maketitle
 
 \section{Introduction}
 
@@ -541,16 +540,16 @@ science effort by the authors. It is hosted in GitHub, and the paper
 repository hosts the data and scripts used to process them, which are
 in fact embedded in this paper source code using Knitr \cite{xie2013knitr}. 
 
-\begin{acks}
+\section{Acknowledgements}
 
   This paper has been supported in part by
 projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
 Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
 
-\end{acks}
 
 
-\bibliographystyle{ACM-Reference-Format}
+
+\bibliographystyle{splncs04}
 \bibliography{geneura,concurrent,perl6}
 
 \end{document}
