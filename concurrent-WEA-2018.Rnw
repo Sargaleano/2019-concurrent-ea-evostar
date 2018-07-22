@@ -62,15 +62,19 @@ Mexico\\
 
 \begin{abstract}
 Concurrent languages such as Perl 6 fully leverage the power of
-current multi-core and hyper-threaded computer architectures. However,
-algorithms have to be redesigned in order to take full advantage of
-the concurrent abstraction; in particular, the use of a reactive
-pattern needs the algorithm to be stateless, with simple functions
-that receive all the context and map it to outputs. In this paper we
+current multi-core and hyper-threaded computer architectures, and they
+include easy ways of automatically parallelizing code. However, to
+achieve more computational capability by using all threads and cores, 
+algorithms need to be redesigned to be run in a concurrent
+environment; in particular, the use of a reactive, fully functional
+patterns needs to turn the algorithm in a series of stateless steps, with simple functions
+that receive all the context and map it to the next stage. In this paper we
 are going to analyze different versions of these stateless, reactive
 architectures applied to evolutionary algorithms, assessing how they
 interact with the characteristics of the evolutionary algorithm itself
-to give a good scaling behavior and performance.
+to give a good scaling behavior and performance. We will use the
+language Perl 6, which is a modern, concurrent language that was
+released recently and is still under very active development.
 
 \keywords{Concurrent algorithms,distributed computing,stateless algorithms, algorithm implementation,performance evaluation,distributed computing,heterogeneous distributed systems.}
 \end{abstract}
