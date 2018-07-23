@@ -301,33 +301,33 @@ they perform the evolutionary algorithm.
 % \label{fig:indi}
 % \end{figure*}
 
-\subsection{Individual-level concurrency}
-\label{ss:indi}
+% \subsection{Individual-level concurrency}
+% \label{ss:indi}
 
-In this version of the algorithm, all functions operate on single individuals or sets of them. We are going to use three different channels:\begin{itemize}
-\item Channel {\sf individual}, which contains chromosomes without a fitness
-  function. A subchannel of this channel takes the chromosomes in groups.
-\item Channel {\sf evaluated}, which contains chromosomes paired with
-  their fitness function. This channel receives individuals one by
-  one, but emits them in groups of three.
-\item Channel {\sf output}, which is used for logging what is
-  happening in the other two channels and printing output at the end
-  of the experiment.
-\end{itemize}
+% In this version of the algorithm, all functions operate on single individuals or sets of them. We are going to use three different channels:\begin{itemize}
+% \item Channel {\sf individual}, which contains chromosomes without a fitness
+%   function. A subchannel of this channel takes the chromosomes in groups.
+% \item Channel {\sf evaluated}, which contains chromosomes paired with
+%   their fitness function. This channel receives individuals one by
+%   one, but emits them in groups of three.
+% \item Channel {\sf output}, which is used for logging what is
+%   happening in the other two channels and printing output at the end
+%   of the experiment.
+% \end{itemize}
 
-There are two functions feeding these channels. \begin{itemize}
+% There are two functions feeding these channels. \begin{itemize}
 
-\item {\sf Evaluator} reacts to the {\sf individual} channel, picking and evaluating a single individual and emits it to the {\sf evaluated} as
-  well as {\sf output} channel as an object that contains the original chromosome and the computed fitness.
-\item {\sf Reproducer} picks three individuals from the {\sf
-    evaluated} channel, generates a new couple using crossover, and
-  emits it to the {\sf individual} channel. This function also acts as
-  selector, and in fact it is similar to 3 tournament, since it takes three individuals and returns only two of them to the channel, along with the two individuals that have been generated via crossover and mutation.
-\item {\sf Diversifier} is a re-broadcasting of the {\sf individual
-    channel}, picks a group of individuals and shuffles it, putting it
-  back into the same channel, giving them a different order in the
-  buffer.
-\end{itemize}
+% \item {\sf Evaluator} reacts to the {\sf individual} channel, picking and evaluating a single individual and emits it to the {\sf evaluated} as
+%   well as {\sf output} channel as an object that contains the original chromosome and the computed fitness.
+% \item {\sf Reproducer} picks three individuals from the {\sf
+%     evaluated} channel, generates a new couple using crossover, and
+%   emits it to the {\sf individual} channel. This function also acts as
+%   selector, and in fact it is similar to 3 tournament, since it takes three individuals and returns only two of them to the channel, along with the two individuals that have been generated via crossover and mutation.
+% \item {\sf Diversifier} is a re-broadcasting of the {\sf individual
+%     channel}, picks a group of individuals and shuffles it, putting it
+%   back into the same channel, giving them a different order in the
+%   buffer.
+% \end{itemize}
 
 % How channels and functions relate to and communicate with each other is represented in Figure \ref{fig:indi}.  The functions described above rebroadcast the values they read from the channel when needed to other channels so that all
 % channels are kept fed and a deadlock situation is not produced. This
@@ -336,109 +336,109 @@ There are two functions feeding these channels. \begin{itemize}
 % a second individual it is not producing new ones and the algorithm
 % will stall. This could be fixed in a different way by changing from a reactive architecture to a {\em polling} architecture, but that kind of architecture also introduces overhead by polling when it is not needed. You have to balance when designing these types of algorithms, anyway; polling is another possibility, but one we are not exploring in this paper.
 
-The concurrency of this situation implies that we can run as many
-copies as available of every one of them. Also that there is an
-initial process where you generate the initial population, a series of
-individuals which must be even, and bigger than the number of
-individuals used in the diversifier. This is equivalent to an initial
-population, although in this case there is no real {\em population},
-since individuals are considered in groups of several, depending on
-the tournament size.
+% The concurrency of this situation implies that we can run as many
+% copies as available of every one of them. Also that there is an
+% initial process where you generate the initial population, a series of
+% individuals which must be even, and bigger than the number of
+% individuals used in the diversifier. This is equivalent to an initial
+% population, although in this case there is no real {\em population},
+% since individuals are considered in groups of several, depending on
+% the tournament size.
 
-Depending on the overhead communication adds, it is possible
-that the performance of this version of the algorithm is not the adequate one, even if
-theoretically it is sound. That is why we have also proposed next a
-coarse-grained version where the function process whole populations.
+% Depending on the overhead communication adds, it is possible
+% that the performance of this version of the algorithm is not the adequate one, even if
+% theoretically it is sound. That is why we have also proposed next a
+% coarse-grained version where the function process whole populations.
 
-\subsection{Population-level concurrency}
-%
-% \begin{figure*}[h!tbp]
-% \includegraphics[width=0.95\textwidth]{population-channel.png}
-% \caption{Channel and functions used in the population-level concurrency version of the algorithm. }
-% \label{fig:pop}
-% \end{figure*}
-%
-In this case, the algorithm uses a single channel that emits and
-receives, as messages, whole
-populations. However, this channel is also re-broadcast as another channel
-that takes the population in pairs. Having a single channel, even is with
-different threads, will make several threads concurrently process
-populations that will evolve in complete independence. This is why
-there are two functions: \begin{itemize}
-\item {\sf Singles} takes single populations and evolves them for a
-  number of generations. It stops if it finds the solution, and closes
-  the channel at the same time.
-\item {\sf Pairs} reads pairs of populations from the sub-channel and
-  mixes them, creating a new population with the best members of both
-  populations. This {\em mixer} is equivalent to a process of
-  migration that takes members from one population to another. Since
-  this function takes two elements from the channel, it must leave two
-  elements in the channel too. What it does is it emits back a
-  randomly chosen population in the pair.
-\end{itemize}
+% \subsection{Population-level concurrency}
+% %
+% % \begin{figure*}[h!tbp]
+% % \includegraphics[width=0.95\textwidth]{population-channel.png}
+% % \caption{Channel and functions used in the population-level concurrency version of the algorithm. }
+% % \label{fig:pop}
+% % \end{figure*}
+% %
+% In this case, the algorithm uses a single channel that emits and
+% receives, as messages, whole
+% populations. However, this channel is also re-broadcast as another channel
+% that takes the population in pairs. Having a single channel, even is with
+% different threads, will make several threads concurrently process
+% populations that will evolve in complete independence. This is why
+% there are two functions: \begin{itemize}
+% \item {\sf Singles} takes single populations and evolves them for a
+%   number of generations. It stops if it finds the solution, and closes
+%   the channel at the same time.
+% \item {\sf Pairs} reads pairs of populations from the sub-channel and
+%   mixes them, creating a new population with the best members of both
+%   populations. This {\em mixer} is equivalent to a process of
+%   migration that takes members from one population to another. Since
+%   this function takes two elements from the channel, it must leave two
+%   elements in the channel too. What it does is it emits back a
+%   randomly chosen population in the pair.
+% \end{itemize}
 
-Additionally, there must be a function, which can be concurrent, to
-create the initial population. The process of migration performed by
-the mixer is needed to overcome the {\em stateless}
-nature of the concurrent process. The state is totally contained in
-the population; the mixer respects this state of affairs by using only
-this information to perform the evolutionary algorithm.
+% Additionally, there must be a function, which can be concurrent, to
+% create the initial population. The process of migration performed by
+% the mixer is needed to overcome the {\em stateless}
+% nature of the concurrent process. The state is totally contained in
+% the population; the mixer respects this state of affairs by using only
+% this information to perform the evolutionary algorithm.
 
-This algorithm has several parameters to tune:\begin{itemize}
-\item {\bf Number of generations} that every function runs. This
-  parameter is equivalent to the time needed to perform some kind of
-  migration, since it is the time after which populations are sent
-  back to the channel for mixing and further evolution.
-\item {\bf initial populations} The channel must never be empty, so
-  some initial random populations must be generated, always in pairs.
-\end{itemize}
+% This algorithm has several parameters to tune:\begin{itemize}
+% \item {\bf Number of generations} that every function runs. This
+%   parameter is equivalent to the time needed to perform some kind of
+%   migration, since it is the time after which populations are sent
+%   back to the channel for mixing and further evolution.
+% \item {\bf initial populations} The channel must never be empty, so
+%   some initial random populations must be generated, always in pairs.
+% \end{itemize}
 
-\subsection{Notes on implementation using Perl 6}
+% \subsection{Notes on implementation using Perl 6}
 
-Perl 6 \cite{Tang:2007:PRI:1190215.1190218} has been chosen to perform
-the implementation of these two different versions of a concurrent
-evolutionary algorithm. This choice has been due mainly to the
-existence of an open source evolutionary algorithm library, recently
-released by the authors and called {\tt
-  Algorithm::Evolutionary::Simple}. This library, released to the
-repository of Perl 6 modules, called CPAN, includes
-functions for the implementation of a very simple evolutionary
-algorithm for optimizing onemax, Royal Road or any other benchmark
-function.
+% Perl 6 \cite{Tang:2007:PRI:1190215.1190218} has been chosen to perform
+% the implementation of these two different versions of a concurrent
+% evolutionary algorithm. This choice has been due mainly to the
+% existence of an open source evolutionary algorithm library, recently
+% released by the authors and called {\tt
+%   Algorithm::Evolutionary::Simple}. This library, released to the
+% repository of Perl 6 modules, called CPAN, includes
+% functions for the implementation of a very simple evolutionary
+% algorithm for optimizing onemax, Royal Road or any other benchmark
+% function.
 
-Perl 6 \cite{lenzperl} is, despite its name, a language that is
-completely different from Perl, designed for scratch to implement most
-modern language features: meta-object protocols, concurrency, and
-functional programming. It does not have a formal grammar, but is
-rather defined by the tests a compiler or interpreter must pass in
-order to be called ``Perl 6''.
-Current implementation consists of a virtual machine with just in
-time capabilities, called MoarVM, and a compiler (Rakudo) which is written mostly in Perl 6 itself, so that it can
-be easily ported from one virtual machine to others; the rest is written in a simple language called NQP (Not Quite Perl). All together they compose the so-called {\em Rakudo
-  star} distribution, a {\em stable} distribution of compiler +
-virtual machine that is released every 4 months from GitHub and to
-package repositories. Right now the Java Virtual Machine is a few features behind MoarVM, and there is a new virtual machine in the works which is based on JavaScript.
+% Perl 6 \cite{lenzperl} is, despite its name, a language that is
+% completely different from Perl, designed for scratch to implement most
+% modern language features: meta-object protocols, concurrency, and
+% functional programming. It does not have a formal grammar, but is
+% rather defined by the tests a compiler or interpreter must pass in
+% order to be called ``Perl 6''.
+% Current implementation consists of a virtual machine with just in
+% time capabilities, called MoarVM, and a compiler (Rakudo) which is written mostly in Perl 6 itself, so that it can
+% be easily ported from one virtual machine to others; the rest is written in a simple language called NQP (Not Quite Perl). All together they compose the so-called {\em Rakudo
+%   star} distribution, a {\em stable} distribution of compiler +
+% virtual machine that is released every 4 months from GitHub and to
+% package repositories. Right now the Java Virtual Machine is a few features behind MoarVM, and there is a new virtual machine in the works which is based on JavaScript.
 
-The advantage of using Perl 6 for this work is that it combines the expressivity of
-an interpreted language with the power of concurrency. Not very many
-languages nowadays include concurrency as a base feature; Go, Scala
-and Erlang are some of them. % add references - JJ
-The concurrency in Go is done in a
-similar way to Perl 6, using channels, but Go is a compiled,
-non-functional language. % What about the others? - JJ
+% The advantage of using Perl 6 for this work is that it combines the expressivity of
+% an interpreted language with the power of concurrency. Not very many
+% languages nowadays include concurrency as a base feature; Go, Scala
+% and Erlang are some of them. % add references - JJ
+% The concurrency in Go is done in a
+% similar way to Perl 6, using channels, but Go is a compiled,
+% non-functional language. % What about the others? - JJ
 
-The main disadvantage of Perl 6 is currently its raw performance, which is much
-slower than Go or Java, although in general, similar although slower than
-other interpreted languages such as Python or Perl; it has also
-improved a lot in the last versions \cite{DBLP:conf/gecco/GuervosV18}. Language
-performance is not an static feature, and it usually improves with
-time; in a separate paper, we have proved how speed has increased by
-orders of magnitude since it was released a few years ago. % Cite the other paper - JJ
+% The main disadvantage of Perl 6 is currently its raw performance, which is much
+% slower than Go or Java, although in general, similar although slower than
+% other interpreted languages such as Python or Perl; it has also
+% improved a lot in the last versions \cite{DBLP:conf/gecco/GuervosV18}. Language
+% performance is not an static feature, and it usually improves with
+% time; in a separate paper, we have proved how speed has increased by
+% orders of magnitude since it was released a few years ago. % Cite the other paper - JJ
 
-This paper, however, is focused on the algorithmic performance more
-than the raw performance, so suffice it to say that Perl 6 performance
-was adequate for running these experiments in a reasonable amount of
-time.
+% This paper, however, is focused on the algorithmic performance more
+% than the raw performance, so suffice it to say that Perl 6 performance
+% was adequate for running these experiments in a reasonable amount of
+% time.
 
 The module used, as well as the code for the experiments, is available
 under a free license.
