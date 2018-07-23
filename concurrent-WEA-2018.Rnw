@@ -184,28 +184,37 @@ conclusions and present future lines of work in section \ref{sec:conclusions}.
 
 \section{State of the Art}
 
-\noindent Developing correct software quickly and efficiently is a
-never ending goal in the software industry. Novel solutions that try
-to make a difference providing new abstraction tools outside the
-mainstream of programming languages have been proposed to pursue this
-goal; two of the most promising are the functional and the concurrent.
+\noindent Despite the emphasis on hardware-based techniques such as
+cloud computing or GPGPU, there are not many papers dealing with
+creating concurrent evolutionary algorithms that work in a single
+computing node.
 
 The concurrent programming paradigm (or concurrency oriented
 programming \cite{Armstrong2003}) is characterized by the presence of
 programming constructs for managing processes like first class
 objects. That is, with operators for acting upon them and the
 possibility of using them like parameters or function's result
-values. This simplifies the coding of concurrent algorithms due to the
+values. This changes the coding of concurrent algorithms due to the
 direct mapping between patterns of communications and processes with
-language expressions.
+language expressions; on one hand it becomes simpler since the
+language provides an abstraction for communication, in the other hand
+it changes the paradigm for implementing algorithms, since these new
+communication constructs have to be taken into account.
 
-Since the creation of concurrent applications is hard for many
-reasons, the communication/synchronization between processes is key in
-the design of such algorithms. One of the best efforts to formalize
+This design has to take into account the communication/synchronization
+between processes, which nowadays will be mainly threads. One of the best efforts to formalize
 and simplify that is the Hoare’s {\em Communicating Sequential
   Processes} \cite{Hoare:1978:CSP:359576.359585}, this interaction
 description language is the theoretical support for many libraries and
-new programming languages. 
+new programming languages. This kind of concurrent programs is based
+on {\em channels}, which are used to interchange message between the
+different processes or threads; messages can be interchanged
+asynchronously or synchronously. The Go language uses this kind of
+model, and Perl 6 will use, among others (like {\em promoses} or
+low-level access to the creation of threads), this one.
+Another, different, approach is actor-based
+concurrency, \cite{schippers2009towards}. This actor model bans shared
+state, with different {\em actors} communicating through messages \cite{erb2012concurrent}. 
 
 When a concurrent programming language is used normally it has a
 particular way of handling units of execution, being independent of
