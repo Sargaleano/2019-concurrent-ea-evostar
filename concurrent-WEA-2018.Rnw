@@ -71,12 +71,12 @@ that receive all the context and map it to the next stage. In this paper, we
 are going to analyze different versions of these stateless, reactive
 architectures applied to evolutionary algorithms, assessing how they
 interact with the characteristics of the evolutionary algorithm itself
-to give a good scaling behavior and performance. We will use the
-language Perl 6, which is a modern, concurrent language that was
+and show how they improve the scaling behavior and performance. We will use the
+Perl 6 language, which is a modern, concurrent language that was
 released recently and is still under very active development.
 % Maybe change the paragraph: 'to give a good scaling behavior' to
 % something like 'and show how they improve the scaling behavior' - M
-
+% Done - JJ
 \keywords{Concurrent algorithms, distributed computing, stateless algorithms,
 algorithm implementation, performance evaluation, distributed computing,
 heterogeneous distributed systems.}
@@ -84,16 +84,20 @@ heterogeneous distributed systems.}
 
 \section{Introduction}
 
-\noindent Genetic algorithms (GA) \cite{GA_Goldberg89} are currently
-one of the most widely used meta-heuristics to solve engineering
-problems. Furthermore, parallel genetic algorithms (pGAs) are useful
-to find  solutions of complex optimizations problems in adequate times
-\cite{Luque2011}; in particular, problems with a complex fitness function.
+\noindent Evolutionary algorithms (EA) \cite{GA_Goldberg89} are currently
+one of the most widely used meta-heuristics to solve optimization
+problems in engineering. If the cost or adequacy of a solution can be
+measured in terms of a single function, called {\em fitness},
+evolutionary algorithms are generally able to find a good solution
+given enough time. 
+Furthermore, parallel genetic algorithms (pEAs) are useful
+to find  solutions of problems with a time-consuming fitness function
+\cite{Luque2011}
 % Was not very clear - M
 % Are they complex mostly in terms of running time or space?
 % In the next paragraph we talk about 'evaluation time'
 Some
-authors \cite{Alba2001} state that using pGAs improves the quality of
+authors \cite{Alba2001} state that using pEAs improves the quality of
 solutions in terms of the number of evaluations needed to find
 one. This reason, together with the improvement in evaluation time
 brought by running simultaneously in several nodes, have made
@@ -109,7 +113,7 @@ some researchers show that implementation matters
 languages/paradigms are not normally seen as a land for scientific
 improvements.
 
-New parallel platforms have been identified as new trends in pGAs
+New parallel platforms have been identified as new trends in pEAs
 \cite{Luque2011}, however, and in general, only advances in hardware are considered. Software platforms, specifically programming languages, remain poorly explored; only Ada \cite{Santos2002} and Erlang \cite{A.Bienz2011,Kerdprasop2013} were slightly tested.
 
 The multicore’s challenge \cite{SutterL05} shows a current need for
@@ -134,14 +138,14 @@ and in practice.
 This research is intended to show some possible areas of improvement
 on architecture and engineering best practices for concurrent-functional paradigms,
 as was made for Object Oriented Programming languages \cite{EO:FEA2000},
-by focusing on pGAs as a domain of application and describing how their principal
+by focusing on pEAs as a domain of application and describing how their principal
 traits can be modeled by means of concurrent-functional languages constructs.
 We are continuing the research reported in \cite{DBLP:conf/gecco/CruzGGC13,J.Albert-Cruz2013}.
 %other papers (hidden for double-blind review).
 
 The rest of the paper is organized as follows. Next section presents the state
 of the art in concurrent and functional programming language paradigms and their
-potential use for implementing pGAs. We present two different versions
+potential use for implementing pEAs. We present two different versions
 of a concurrent evolutionary algorithm in Section \ref{sec:impl},
 to be followed by actual results in section \ref{sec:res}. Finally, we draw the
 conclusions and present future lines of work in section \ref{sec:conclusions}.
@@ -182,7 +186,7 @@ mono-processor machine.
 Functional programming paradigm, despite its advantages, does not have
 many followers. Several years ago was used in Genetic Programming
 \cite{Briggs:2008:FGP:1375341.1375345,Huelsbergen:1996:TSE:1595536.1595579,walsh:1999:AFSFESIHLP}
-and recently in neuroevolution \cite{Sher2013} but in GA its presence
+and recently in neuroevolution \cite{Sher2013} but in EA its presence
 is practically nonexistent \cite{Hawkins:2001:GFG:872017.872197}.
 
 This paradigm is characterized by the use of functions as first
@@ -514,7 +518,7 @@ size; besides, when comparing it with the population-level concurrent
 EA and the canonical and sequential evolutionary algorithm, it obtains
 a much better performance, being able to obtain the solution with a
 much lower evaluation budget. Second best is the population-level
-concurrent algorithm, to be followed by the baseline canonical GA,
+concurrent algorithm, to be followed by the baseline canonical EA,
 which obtains the worse result. This proves that, even from the purely
 algorithmic point of view, concurrent evolutionary algorithms are
 better than sequential algorithms. If we consider time, the difference
@@ -530,7 +534,7 @@ concurrent version of the algorithms. The selection pressure of the
 canonical algorithm is relatively low, depending on roulette wheel. The
 population-level concurrent algorithm eliminates half the population
 with the worst fitness, although every generation it is running a
-canonical GA identical to the baseline; however, this exerts a high
+canonical EA identical to the baseline; however, this exerts a high
 selective pressure on the population which, combined with the
 increased diversity of running two populations in parallel, results in
 better results. Same happens with the individual-level concurrent EA:
@@ -576,8 +580,6 @@ in fact embedded in this paper source code using Knitr \cite{xie2013knitr}.
   This paper has been supported in part by
 projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
 Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
-
-
 
 
 \bibliographystyle{splncs04}
