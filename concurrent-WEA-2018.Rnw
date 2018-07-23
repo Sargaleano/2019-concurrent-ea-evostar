@@ -79,9 +79,6 @@ released recently and is still under very active development.
 \keywords{Concurrent algorithms,distributed computing,stateless algorithms, algorithm implementation,performance evaluation,distributed computing,heterogeneous distributed systems.}
 \end{abstract}
 
-
-
-
 \section{Introduction}
 
 \noindent Genetic algorithms (GA) \cite{GA_Goldberg89} are currently
@@ -105,7 +102,8 @@ some researchers show that implementation matters
 languages/paradigms is not normally seen as a land for scientific
 improvements. 
 
-New parallel platforms have been identified as new trends in pGAs \cite{Luque2011}, however only hardware is considered. Software platforms, specifically programming languages, remain poorly explored; only Ada \cite{Santos2002} and Erlang \cite{A.Bienz2011,Kerdprasop2013} were slightly tested.
+New parallel platforms have been identified as new trends in pGAs
+\cite{Luque2011}, however, and in general, only advances in hardware are considered. Software platforms, specifically programming languages, remain poorly explored; only Ada \cite{Santos2002} and Erlang \cite{A.Bienz2011,Kerdprasop2013} were slightly tested.
 
 The multicore’s challenge \cite{SutterL05} shows a current need for making parallel even the simplest program. But this way leads us to use and create design patterns for concurrent algorithms; the conversion of a pattern into a language feature is a common practice in the programming languages domain, and sometimes that means a language modification, others the creation of a new one. 
 
@@ -142,7 +140,13 @@ values. This simplifies the coding of concurrent algorithms due to the
 direct mapping between patterns of communications and processes with
 language expressions. 
 
-Concurrent programming is hard for many reasons, the communication/synchronization between processes is key in the design of such algorithms. One of the best efforts to formalize and simplify that is the Hoare’s {\em Communicating Sequential Processes} \cite{Hoare:1978:CSP:359576.359585}, this interaction description language is the theoretical support for many libraries and new programming languages.
+Since the creation of concurrent applications is hard for many
+reasons, the communication/synchronization between processes is key in
+the design of such algorithms. One of the best efforts to formalize
+and simplify that is the Hoare’s {\em Communicating Sequential
+  Processes} \cite{Hoare:1978:CSP:359576.359585}, this interaction
+description language is the theoretical support for many libraries and
+new programming languages. 
 
 When a concurrent programming language is used normally it has a
 particular way of handling units of execution, being independent of
@@ -233,18 +237,12 @@ architectures, which basically differ in the granularity with which
 they perform the evolutionary algorithm.
 
 %
-\begin{figure*}[t!bp]
+\begin{figure*}[h!tbp]
 \includegraphics[width=0.95\textwidth]{channels-individual.png}
 \caption{Channels and functions used in the individual-level concurrency version of the algorithm. }
 \label{fig:indi}
 \end{figure*}
-%
-\begin{figure*}[t!bp]
-\includegraphics[width=0.95\textwidth]{population-channel.png}
-\caption{Channel and functions used in the population-level concurrency version of the algorithm. }
-\label{fig:pop}
-\end{figure*}
-%
+
 \subsection{Individual-level concurrency}
 \label{ss:indi}
 
@@ -294,7 +292,13 @@ theoretically it is sound. That is why we have also proposed next a
 coarse-grained version where the function process whole populations.
 
 \subsection{Population-level concurrency}
-
+%
+\begin{figure*}[h!tbp]
+\includegraphics[width=0.95\textwidth]{population-channel.png}
+\caption{Channel and functions used in the population-level concurrency version of the algorithm. }
+\label{fig:pop}
+\end{figure*}
+%
 In this case, the algorithm uses a single channel that emits and receives
 populations. However, this channel is also re-broadcast as another channel
 that takes the population in pairs. Having a single channel, even is with
