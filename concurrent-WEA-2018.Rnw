@@ -342,10 +342,11 @@ initial process where you generate the initial population, a series of
 individuals which must be even, and bigger than the number of
 individuals used in the diversifier. This is equivalent to an initial
 population, although in this case there is no real {\em population},
-since individuals are considered in groups of three.
+since individuals are considered in groups of several, depending on
+the tournament size.
 
-Depending on the overhead emission and reception adds, it is possible
-that the performance of this channel is not the adequate one, even if
+Depending on the overhead communication adds, it is possible
+that the performance of this version of the algorithm is not the adequate one, even if
 theoretically it is sound. That is why we have also proposed next a
 coarse-grained version where the function process whole populations.
 
@@ -357,7 +358,8 @@ coarse-grained version where the function process whole populations.
 \label{fig:pop}
 \end{figure*}
 %
-In this case, the algorithm uses a single channel that emits and receives
+In this case, the algorithm uses a single channel that emits and
+receives, as messages, whole
 populations. However, this channel is also re-broadcast as another channel
 that takes the population in pairs. Having a single channel, even is with
 different threads, will make several threads concurrently process
@@ -427,7 +429,8 @@ non-functional language. % What about the others? - JJ
 
 The main disadvantage of Perl 6 is currently its raw performance, which is much
 slower than Go or Java, although in general, similar although slower than
-other interpreted languages such as Python or Perl. Language
+other interpreted languages such as Python or Perl; it has also
+improved a lot in the last versions \cite{DBLP:conf/gecco/GuervosV18}. Language
 performance is not an static feature, and it usually improves with
 time; in a separate paper, we have proved how speed has increased by
 orders of magnitude since it was released a few years ago. % Cite the other paper - JJ
@@ -442,6 +445,52 @@ under a free license.
 
 \section{Experimental setup and results}
 \label{sec:res}
+
+The first experiments we have performed for this paper included using
+implicit autothreading, in the shape of the method called {\tt race}
+or {\tt hyper}. These methods auto-thread the processing of arrays or
+list, disregarding the order in the first case, using it in the second
+case. In order to check this we implemented the p-peaks function
+\cite{kennedy1998matching}, which was considered more adequate for
+this task since it is, at the same time, deceptive from the point of
+view of the evolutionary algorithm and computing-intensive, involving
+computing the distance to a number of generated binary strings, which
+in this case were 100.
+
+In order to do this implicitly parallel version, several changes had
+to be made to the function that evaluates the whole
+population: \begin{itemize}
+\item First, the cache had to be turned off. We were using a cache to
+  keep all values that were already computed, and we had to stop using
+  it. Since it is autothreaded, trying to store or retrieve from the
+  cache simultaneously could result in deadlocks or crashes. 
+\item Do all the computation in a functional way, without side
+  effects. The auto-threaded code must take values, return values,
+  without changing any external variable on the fly. All values are
+  then computed and assigned to the data structure that holds them.
+\end{itemize}
+
+Perl 6, by default, uses 4 threads for auto-threading. We designed
+population evaluation so that it was autothreaded, and did some
+runtime tests. Without changing the algorithm, this resulted in an
+almost 4x speedup of the original code. 
+
+This implies that using implicitly parallel facilities might allow,
+without much changes to the underlying algorithm, to use
+multithreading and achieve speedups, as already observed in
+\cite{DBLP:conf/gecco/GuervosV18}. However, it is essential that what
+is being parallelized is a substantial amount of work. Using just
+MaxOnes, as in the above mentioned paper, will not offer any
+substantial speedups and might even result in performance taking a
+hit.
+
+
+However, we were more interested in creating explicit concurrent
+version of the evolutionary algorithm, and do a set of experiments to
+make them work properly. In the next set of experiments we will
+concentrate not so much in runtime performance, but on algorithmic
+performance, that is, the number of evaluations needed to find the
+solution.
 %
 \begin{figure*}[h!tb]
   \centering
@@ -495,7 +544,7 @@ sizes. We compared mainly the number of evaluations needed, since that
 is the main measure of the quality of the algorithm.
 
 We show in Figure \ref{fig:evals:mo} the logarithmic chart  of the
-number of evaluations that are reached for different, logarithmically
+number of evaluations needed to find the solution for different, logarithmically
 growing, chromosome sizes using the individually concurrent
 evolutionary algorithm. There is a logical increase in the number of
 evaluations needed, but the fact that it is a low number and its
@@ -505,7 +554,20 @@ take it to local minimum. The number of evaluations is, in fact, quite
 stable.
 
 We did the same for the population-level concurrent algorithm;
-however, since this one has got parameters to tune, we had to find a good result. In order to do that, we tested different number of initial populations placed in the channel, since this seems to be the critical parameter, more than the number of generations until mixing. The results are shown in Figure \ref{fig:pop:initial}. The difference between using 4 and 6 initial populations is virtually none, but there is a slight advantage if you use only 2 initial populations to kickstart the channel. Please bear in mind that, in this case, the concept of {\em population} is slightly different from the one used in island EAs. While in the latter the population does not move from the island, in this case populations are read from channels and acted upon, and in principle there could be as many initial or unread populations as wanted or needed; every function in every thread will process a single population nonetheless.
+however, since this one has got parameters to tune, we had to find a
+good result. In order to do that, we tested different number of
+initial populations placed in the channel, since this seems to be the
+critical parameter, more than the number of generations until
+mixing. The results are shown in Figure \ref{fig:pop:initial}. The
+difference between using 4 and 6 initial populations is virtually
+none, but there is a slight advantage if you use only 2 initial
+populations to kickstart the channel. Please bear in mind that, in
+this case, the concept of {\em population} is slightly different from
+the one used in island EAs. While in the latter the population does
+not move from the island, in this case populations are read from
+channels and acted upon, and in principle there could be as many
+initial or unread populations as wanted or needed; every function in
+every thread will process a single population nonetheless. 
 
 We can now compare these two algorithms with the baseline EA. This is
 a canonical evolutionary algorithm using bitflip mutation and
@@ -529,16 +591,27 @@ time. This figure is the base to reach our conclusions.
 \label{sec:conclusions}
 
 It is natural to take advantage of the multi-threading and multi-process
-capabilities of modern architectures to make evolutionary or other
-population-based algorithms faster; that can be done in a very
+capabilities of modern hardware architectures to make evolutionary or other
+population-based algorithms run faster by using all CPUs and threads
+at the same time; that can be done in a very
 straightforward way by parallelizing the evolutionary algorithm using
 the many available models, such as island model; however, it is
 possible that adapting the algorithm itself to the architecture makes
-its performance better.
+its performance better, by actually adapting the resources consumed to
+the resources used, instead of allocating them in advance as it is
+done in island architectures.
 
-However, this change implies also a different vision of the algorithm,
+The first exploration of the facilities for concurrent programming
+Perl 6 uses has been done through the auto-threading mechanism that
+allows the parallel execution of code on arrays or lists. After making
+small changes, this resulted in a speedup of the program in a number
+that is compatible with the number of threads used by default, four.
+
+However, a change to a concurrent architecture implies looking at an
+algorithm in a different, non sequential way, 
 that is why the first thing that has to be evaluated is the actual
-number of evaluations that need to be done to solve the problem. This
+number of evaluations that need to be done to solve the problem, since
+the new implementation is not functionally equivalent to the old one. This
 is what we have done in this paper. We have proposed two different
 concurrent implementations of an evolutionary algorithms with different
 {\em grain}: a {\em fine-grained} one that acts at the individual
@@ -562,15 +635,17 @@ threads.
 These results are not so much inherent to the concurrency itself as
 dependent on the selection operators that have been included in the
 concurrent version of the algorithms. The selection pressure of the
-canonical algorithm is relatively low, depending on roulette wheel. The
+canonical algorithm is relatively low, depending on the roulette wheel
+selection algorithm, as opposed to the more greedy operation of the
+individual-level algorith, which uses tournament selection. The
 population-level concurrent algorithm eliminates half the population
 with the worst fitness, although every generation it is running a
 canonical EA identical to the baseline; however, this exerts a high
 selective pressure on the population which, combined with the
 increased diversity of running two populations in parallel, results in
-better results. Same happens with the individual-level concurrent EA:
+better performance. Same happens with the individual-level concurrent EA:
 the worst of three is always eliminated, which exerts a big pressure
-on the population, which thus is able to find the solution much
+on the population, which is thus able to find the solution much
 faster. Nothing prevents us from using these same mechanisms in an
 evolutionary algorithm, which would then be functionally equivalent to
 these concurrent algorithms, but we wanted to compare a canonical EA
@@ -623,7 +698,7 @@ in fact embedded in this paper source code using Knitr \cite{xie2013knitr}.
   This paper has been supported in part by
 projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
 Competitiveness) and DeepBio (TIN2017-85727-C4-2-P). I would like to
-express my gratefulness to the users in the #perl6 IRC channel,
+express my gratefulness to the users in the \#perl6 IRC channel,
 specially Elizabeth Mattijsen, Timo Paulsen and Zoffix Znet, who
 helped me with the adventure of programming efficient concurrent
 evolutionary algorithms. 
