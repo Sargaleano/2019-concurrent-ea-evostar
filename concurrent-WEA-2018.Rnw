@@ -210,7 +210,7 @@ new programming languages. This kind of concurrent programs is based
 on {\em channels}, which are used to interchange message between the
 different processes or threads; messages can be interchanged
 asynchronously or synchronously. The Go language uses this kind of
-model, and Perl 6 will use, among others (like {\em promoses} or
+model, and Perl 6 will use, among others (like {\em promises} or
 low-level access to the creation of threads), this one.
 Another, different, approach is actor-based
 concurrency, \cite{schippers2009towards}. This actor model bans shared
@@ -240,13 +240,14 @@ features such as promises/futures, Software Transaction Memory and
 agents; Kotlin \cite{simson2017open} has been recently used for
 implementing a functional evolutionary algorithm framework.  
 
-
 On the
 other hand, Perl 6 \cite{Tang:2007:PRI:1190215.1190218} uses different
 concurrency models, that go from implicit concurrency using a
 particular function that automatically parallelizes operations on
 iterable data structures, to explicit concurrency using threads. These
-both types of concurrency will be analyzed in this paper.
+both types of concurrency will be analyzed in this paper, which uses
+the {\tt Algorithm::Evolutionary::Simple} library for that language
+which was presented in the same conference \cite{DBLP:conf/gecco/GuervosV18}
 
 \section{Concurrent evolutionary algorithms and its implementation}
 \label{sec:impl}
@@ -447,7 +448,7 @@ under a free license.
 <<results-mo, cache=FALSE,echo=FALSE>>=
 ggplot(evaluations,aes(x=bits,y=evaluations,group=bits))+geom_boxplot()+ scale_y_log10()+theme_tufte()+labs(x="Bits",y="Evaluations",title="Individually concurrent evolutionary algorithm")
 @
-\caption{Boxplot of the number of evaluations needed for different number of bits in the maxones problem. Please note that axes $x$ and $y$ both have a logarithmic scale.}
+\caption{Boxplot of the number of evaluations needed for different number of bits in the MaxOnes problem. Please note that axes $x$ and $y$ both have a logarithmic scale.}
 \label{fig:evals:mo}
 \end{figure*}
 %
@@ -458,7 +459,7 @@ algorithm, with no mutation, in order to find out what's the correct
 population for every problem size \cite{lobo2005review}. This method
 sizes populations looking for the minimal size that achieves a 95\%
 success rate on a particular problem and problem size; in this case,
-size 512 was the ideal for the maxones problem with size 64. This size
+size 512 was the ideal for the MaxOnes problem with size 64. This size
 was used as a base for the rest of the problem sizes; since the real
 evolutionary algorithm actually uses mutation, the population was
 halved for the actual experiments. This population size is more
@@ -600,6 +601,18 @@ number of threads. However, that number might be higher than the
 available number of threads in a desktop processor, so it has to be
 measured in practice.
 
+This paper has been intended mainly as a proof of concept, and thus
+does not really focuses on creating a scalable architecture for
+concurrent evolutionary algorithms. Preliminary results with the
+individual-level concurrency indicate that a basic redesign is
+probably needed to achieve good scaling performance. One of the
+problems with this architecture is that actually every thread is doing
+much less work than communication; since the application is
+communication-bound it will get worse as the number of threads
+increases. While keeping functional equivalence, it is probably better
+to work with bigger batch sizes instead of working with a single
+individual. 
+
 Finally, we would like to remark that this paper is part of the open
 science effort by the authors. It is hosted in GitHub, and the paper
 repository hosts the data and scripts used to process them, which are
@@ -609,7 +622,11 @@ in fact embedded in this paper source code using Knitr \cite{xie2013knitr}.
 
   This paper has been supported in part by
 projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
-Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
+Competitiveness) and DeepBio (TIN2017-85727-C4-2-P). I would like to
+express my gratefulness to the users in the #perl6 IRC channel,
+specially Elizabeth Mattijsen, Timo Paulsen and Zoffix Znet, who
+helped me with the adventure of programming efficient concurrent
+evolutionary algorithms. 
 
 
 \bibliographystyle{splncs04}
