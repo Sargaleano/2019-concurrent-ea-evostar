@@ -216,43 +216,32 @@ Another, different, approach is actor-based
 concurrency, \cite{schippers2009towards}. This actor model bans shared
 state, with different {\em actors} communicating through messages \cite{erb2012concurrent}. 
 
-When a concurrent programming language is used normally it has a
-particular way of handling units of execution, being independent of
-the operation system has several advantages: one program in those
-languages will work the same way on different operating systems. Also
-they can efficiently manage a lot of processes even on a
-mono-processor machine.
 
-
-Functional programming paradigm, despite its advantages, does not have
-many followers. Several years ago was used in Genetic Programming
+The fact that messages have to be processed without secondary effects
+and that actors do not share any kind of state makes concurrent
+programming specially fit for functional languages or languages with
+functional features; this has made this paradigm specially popular for
+late cloud computing implementations; however, its presence in the EA
+world is not so widespread, although some efforts have lately revived
+the interest for this kind of paradigm \cite{swan2015research}. Several years ago was used in Genetic Programming
 \cite{Briggs:2008:FGP:1375341.1375345,Huelsbergen:1996:TSE:1595536.1595579,walsh:1999:AFSFESIHLP}
-and recently in neuroevolution \cite{Sher2013} but in EA its presence
-is practically nonexistent \cite{Hawkins:2001:GFG:872017.872197}.
+and recently in neuroevolution \cite{Sher2013} but in EA its presence,
+despite being scarce in the previous years
+\cite{Hawkins:2001:GFG:872017.872197}, has experimented a certain rise
+lately with papers such as \cite{valkov2018synthesis} which perform
+program synthesis using functional programming or
+\cite{barwell2017using} which uses the functional and parallel
+language Erlang for an evolutionary multi-agent system.
 
-This paradigm is characterized by the use of functions as first
-class concepts, and for discouraging the use of state changes, with
-functions mapping directly input to output without having any side effect. The
-latter is particularly useful for develop concurrent algorithms in
-which the communication by state changes is the origin of errors and
-complexity. Also, functional features like closures and first class
-functions in general, allow to express in one expression patterns like
-\emph{observer} which in language like Java need so many lines and
-files of source code.
-
-The field of programming languages research is very active in the
-Computer Science discipline. To find software construction tools with
-new and better means of algorithms expression is welcome. In the last
-few years the functional and concurrent paradigms have produced a rich
-mix in which concepts of the first one had been simplified by the use
-of the second ones.
-
-Among this new generation, the languages Erlang and Scala have
+Among languages with functional features, the languages Erlang and Scala have
 embraced the actor model of concurrency and get excellent results in
 many application domains; Clojure is another one with concurrent
 features such as promises/futures, Software Transaction Memory and
-agents. All of these tools have processes like built-in types and
-scale beyond the restrictions of the number of OS-threads. On the
+agents; Kotlin \cite{simson2017open} has been recently used for
+implementing a functional evolutionary algorithm framework.  
+
+
+On the
 other hand, Perl 6 \cite{Tang:2007:PRI:1190215.1190218} uses different
 concurrency models, that go from implicit concurrency using a
 particular function that automatically parallelizes operations on
