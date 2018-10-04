@@ -1,2 +1,2 @@
-# evosotf-concurrent-perl6
-Paper for EvoSoft Concurrent Perl6 Evolutionary algorithms
+# evostar-concurrent-perl6
+Paper for EvoStar 2019 Concurrent Perl6 Evolutionary algorithms
