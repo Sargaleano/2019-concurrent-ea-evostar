@@ -125,7 +125,7 @@ parallel platforms as a challenge in EAs \cite{Luque2011}, in general,
 only advances in hardware are considered. Software platforms,
 specifically programming languages, remain poorly explored; only Ada
 \cite{Santos2002}, Scala \cite{krzywicki2015massively} and Erlang
-\cite{A.Bienz2011,Kerdprasop2013,Stypka2018,butcher2018actor} have
+\cite{A.Bienz2011,kerdprasop2012concurrent,Kerdprasop2013,Stypka2018,butcher2018actor} have
 been analyzed in the area of evolutionary computation. Even so, the
 number of works on this area has increased lately, since the challenge
 of multi-core, hyper-threaded architectures \cite{SutterL05} need
