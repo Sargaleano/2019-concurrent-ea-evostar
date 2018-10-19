@@ -92,7 +92,7 @@ evolutionary algorithms are generally able to find a good solution
 given enough time. 
 Furthermore, parallel and distributed evolutionary algorithms (pEAs) are useful
 to find  solutions of problems with a time-consuming fitness function
-\cite{Luque2011,merelo2018cloudy,gong2015distributed}
+\cite{alba2002,Luque2011,merelo2018cloudy,gong2015distributed}
 % Was not very clear - M
 % Are they complex mostly in terms of running time or space?
 % In the next paragraph we talk about 'evaluation time'
