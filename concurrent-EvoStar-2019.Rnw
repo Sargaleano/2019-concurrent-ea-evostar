@@ -58,7 +58,7 @@ Mexico\\
 
 \maketitle
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 Concurrent languages such as Perl 6 fully leverage the power of
 current multi-core and hyper-threaded computer architectures, and they
@@ -82,6 +82,7 @@ algorithm implementation, performance evaluation, distributed computing,
 heterogeneous distributed systems.}
 \end{abstract}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
 \noindent Evolutionary algorithms (EA) \cite{GA_Goldberg89} are currently
@@ -130,7 +131,7 @@ been analyzed in the area of evolutionary computation. Even so, the
 number of works on this area has increased lately, since the challenge
 of multi-core, hyper-threaded architectures \cite{SutterL05} need
 better applications, even simpler ones, to be
-parallelized. Eventually, this  shows the need use and
+parallelized\cite{adeli1994concurrent}. Eventually, this  shows the need use and
 create design patterns for concurrent algorithms; the conversion of a pattern
 into a language feature is a common practice in the programming languages domain,
 and sometimes that means a language modification, others the creation
@@ -182,10 +183,11 @@ of a concurrent evolutionary algorithm in Section \ref{sec:impl},
 to be followed by actual results in section \ref{sec:res}. Finally, we draw the
 conclusions and present future lines of work in section \ref{sec:conclusions}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{State of the Art}
 
 \noindent Despite the emphasis on hardware-based techniques such as
-cloud computing or GPGPU, there are not many papers dealing with
+cloud computing or GPGPU, there are not many papers \cite{Xia2010} dealing with
 creating concurrent evolutionary algorithms that work in a single
 computing node.
 
@@ -233,7 +235,8 @@ program synthesis using functional programming or
 \cite{barwell2017using} which uses the functional and parallel
 language Erlang for an evolutionary multi-agent system.
 
-Among languages with functional features, the languages Erlang and Scala have
+Among languages with functional features, the languages 
+Erlang \cite{kerdprasop2012concurrent,Kerdprasop2013} and Scala have
 embraced the actor model of concurrency and get excellent results in
 many application domains; Clojure is another one with concurrent
 features such as promises/futures, Software Transaction Memory and
@@ -249,6 +252,8 @@ both types of concurrency will be analyzed in this paper, which uses
 the {\tt Algorithm::Evolutionary::Simple} library for that language
 which was presented in the same conference \cite{DBLP:conf/gecco/GuervosV18}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concurrent evolutionary algorithms and its implementation}
 \label{sec:impl}
 
@@ -442,7 +447,9 @@ they perform the evolutionary algorithm.
 
 The module used, as well as the code for the experiments, is available
 under a free license.
+% the link should be included, as a footnote   [pedro]
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental setup and results}
 \label{sec:res}
 
@@ -587,6 +594,7 @@ better than the baseline, and please note this measures the number of
 evaluations, equivalent to the algorithmic complexity, and not
 time. This figure is the base to reach our conclusions.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions and discussion}
 \label{sec:conclusions}
 
@@ -693,6 +701,7 @@ science effort by the authors. It is hosted in GitHub, and the paper
 repository hosts the data and scripts used to process them, which are
 in fact embedded in this paper source code using Knitr \cite{xie2013knitr}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgements}
 
   This paper has been supported in part by
