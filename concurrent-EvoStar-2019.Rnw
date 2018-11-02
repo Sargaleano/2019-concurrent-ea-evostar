@@ -40,22 +40,32 @@ comparison.64 <- rbind(comparison.64,
 
 \title{Going stateless in concurrent evolutionary algorithms}
 
-\author{Juan J. Merelo\inst{1}
+% \author{Juan J. Merelo\inst{1}
+% \and
+% José-Mario García-Valdez\inst{2}}
+
+% \institute{%
+%   Universidad de Granada/CITIC\\
+%   Granada, Spain\\
+%   \email{jmerelo@ugr.es}\\
+% \and
+% Instituto Tecnológico de Tijuana\\
+% Calzada Tecnológico, s/n\\
+% Tijuana\\
+% Mexico\\
+% \email{mario@tectijuana.edu.mx}
+% }
+
+
+\author{A. U. Thorone \inst{1}
 \and
-José-Mario García-Valdez\inst{2}}
+A. U. Thortwo \inst{2}}
 
 \institute{%
-  Universidad de Granada/CITIC\\
-  Granada, Spain\\
-  \email{jmerelo@ugr.es}\\
+Institute One\\
 \and
-Instituto Tecnológico de Tijuana\\
-Calzada Tecnológico, s/n\\
-Tijuana\\
-Mexico\\
-\email{mario@tectijuana.edu.mx}
+Institute Two
 }
-
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -704,14 +714,16 @@ in fact embedded in this paper source code using Knitr \cite{xie2013knitr}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgements}
 
-  This paper has been supported in part by
-projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
-Competitiveness) and DeepBio (TIN2017-85727-C4-2-P). I would like to
-express my gratefulness to the users in the \#perl6 IRC channel,
-specially Elizabeth Mattijsen, Timo Paulsen and Zoffix Znet, who
-helped me with the adventure of programming efficient concurrent
-evolutionary algorithms. 
-
+%%   This paper has been supported in part by
+%% projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
+%% Competitiveness) and DeepBio (TIN2017-85727-C4-2-P). I would like to
+%% express my gratefulness to the users in the \#perl6 IRC channel,
+%% specially Elizabeth Mattijsen, Timo Paulsen and Zoffix Znet, who
+%% helped me with the adventure of programming efficient concurrent
+%% evolutionary algorithms. 
+Acknowledgements taking\\
+this much\\
+space
 
 \bibliographystyle{splncs04}
 \bibliography{geneura,concurrent,perl6}
