@@ -213,6 +213,25 @@ language provides an abstraction for communication, in the other hand
 it changes the paradigm for implementing algorithms, since these new
 communication constructs have to be taken into account.
 
+The EvAg model \cite{evag:gpem} is a locally concurrent and globally
+parallel evolutionary algorithm that leaves the management of the
+different agents (i.e. threads) to the underlying platform scheduler
+and displays an interesting feature: the model is able to scale
+seamlessly and take full advantage of CPU threads. In a first attempt
+to measure the scalability of the approach experiments were conducted
+in \cite{wcci:evoag} for a single and a dual-core processor showing
+that, for cost functions depassing some milliseconds of computing
+time, the model was able to achieve near linear speed-ups . This study
+was later on extended in \cite{DBLP:conf/evoW/LaredoBMG12} by scaling
+up the experimentation to up to 188 parallel machines\footnote{
+  Experiments were conducted in the NEC Nehalem cluster at the HPC
+  center of the University of Stuttgart. See
+  https://www.hlrs.de/de/systems/nec-cluster-laki-laki2/ for further
+  details on the architecture. Accessed on November 2018).}. The
+reported speed-up was $\times 960$ which is beyond the linear $\times
+188$ that could be expected if local concurrency were not taken into
+account.  
+
 This design has to take into account the communication/synchronization
 between processes, which nowadays will be mainly threads. One of the best efforts to formalize
 and simplify that is the Hoare’s {\em Communicating Sequential
@@ -226,8 +245,7 @@ model, and Perl 6 will use, among others (like {\em promises} or
 low-level access to the creation of threads), this one.
 Another, different, approach is actor-based
 concurrency, \cite{schippers2009towards}. This actor model bans shared
-state, with different {\em actors} communicating through messages \cite{erb2012concurrent}. 
-
+state, with different {\em actors} communicating through messages \cite{erb2012concurrent}.
 
 The fact that messages have to be processed without secondary effects
 and that actors do not share any kind of state makes concurrent
