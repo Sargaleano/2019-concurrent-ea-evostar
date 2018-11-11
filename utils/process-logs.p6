@@ -4,7 +4,8 @@ use v6;
 
 use JSON::Fast;
 
-for $*ARGFILES -> $file {
+say "Threads, Generations, Time";
+for @*ARGS -> $file {
     my $content =  $file.IO.slurp;
     $content ~~ s:g/\} . \{/\},\n\{/;
     my @data = from-json('[' ~ $content ~ ']')<>;
@@ -23,10 +24,9 @@ for $*ARGFILES -> $file {
 	}
     } while @data.elems;
 
-    say "Threads, Generations, Time";
     for @experiments -> $e {
 	my $generations = $e<data>.elems;
 	my $duration = DateTime.new($e<data>[*-1]<at>) - DateTime.new($e<meta><start-at>);
-	say $e<meta><threads> ~ ", " ~ $generations*$e<meta><population-size>*$e<meta><generations>, $duration";
+	say $e<meta><threads> ~ ", " ~ $generations*$e<meta><population-size>*$e<meta><generations> ~ ", $duration";
     }
 }
