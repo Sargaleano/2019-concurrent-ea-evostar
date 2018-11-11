@@ -13,3 +13,6 @@ ggplot(data,aes(x=evaluations,y=time,color=generations))+geom_point()+theme_tuft
 
 ggplot(data,aes(x=generations,y=evaluations,group=generations))+geom_boxplot()+theme_tufte()+labs(title="Evaluations vs generation gap")
 ggplot(data,aes(x=generations,y=time,group=generations))+geom_boxplot()+theme_tufte()+labs(title="Time vs generation gap")
+
+data$avg.eval = data$evaluations/data$time
+ggplot(data,aes(x=generations,y=avg.eval,group=generations))+geom_boxplot()+theme_tufte()+labs(title="Time vs generation gap")
