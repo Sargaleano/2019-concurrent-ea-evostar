@@ -1,0 +1,6 @@
+2018-11-11  JJMerelo  <jmerelo@bojack>
+
+	* utils/chart.R: Two more experiments, or sets of experiments, should be proposed:
+	1. Try with a generation gap of 16, to see if we achieve a slight improvement in the number of evaluations per second.
+	2. Repeat all three experiments with other population sizes to account for lack of initial diversity.
+
