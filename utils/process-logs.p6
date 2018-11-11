@@ -8,7 +8,6 @@ sub MAIN( $file ) {
     my $content =  $file.IO.slurp;
     $content ~~ s:g/\} . \{/\},\n\{/;
     my @data = from-json('[' ~ $content ~ ']');
-    say @data.elems;
-    say to-json([{ a => 2, c=> 3},{ a => 4, c=> 5}]);
+    say @data.perl;
     say @data[0];
 }
