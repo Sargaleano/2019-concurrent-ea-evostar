@@ -39,6 +39,9 @@ comparison.64 <- rbind(comparison.64,
 @
 
 \title{Exploring concurrent evolutionary algorithms}
+% Juanlu -Consider the title:
+% Juanlu -\title{Exploring concurrent and stateless evolutionary algorithms}
+% Juanlu - I think missing stateless is missing a good selling point of the paper
 
 % \author{Juan J. Merelo\inst{1}
 % \and
@@ -111,6 +114,7 @@ implementation of any algorithm. In particular, evolutionary
 algorithms need to change to fit an architecture that creates and
 processes streams of data using functions that do not change state. 
 
+%% Juanlu -  This could be a good spot to insert/merge the content of the state of the art (See note in the S.O.A. section)
 
 In previous papers 
 \cite{Merelo:2018:MEA:3205651.3208317:anon,Garcia-Valdez:2018:MEA:3205651.3205719:anon},
@@ -123,9 +127,12 @@ number of generations, which we call the {\em generation gap} or
 simply {\em gap}, and send the population in the final generation back
 to the channel. Several populations are created initially, and a
 concurrent {\em mixer} is run which takes populations in couples,
-mixes them leaving only a single population with the best. This {\em
+mixes them leaving only a single population with the best.
+% Juanlu - with the best what? best individuals? Please specify.
+% Juanlu - for the future, it would be interesting to study several policies, such as keeping a high diversity instead of just the best individuals. !? 
+ This {\em
   gap} is then conceptually, if not functionally, similar to the {\em
-  time to migration} in parallel evolutionary algorithms (which which
+  time to migration} in parallel evolutionary algorithms (with which
 concurrent evolutionary algorithms have a big resemblance).
 
 We did some initial exploration of the parameter space in
@@ -139,7 +146,9 @@ looking particularly at two parameters that have a very important
 influence on performance: population size and generation gap. Our
 intention is to create a rule of thumb for setting them in this kind
 of algorithms, so that they are able to achieve the best
-performance. In principle, we will work with two threads, one for
+performance. 
+% Juanlu - If space is needed, the rest of the paragraph is expendable as it will appear in the Experimental Setup section.
+In principle, we will work with two threads, one for
 mixing the populations and another for evolution. Using more threads
 for evolution, in principle, should follow the same rules, but how
 that would influence scaling is left for future papers.
@@ -154,6 +163,7 @@ conclusions and present future lines of work in section \ref{sec:conclusions}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{State of the Art}
+%Juanlu - Think about merging the state of the art at the introduction to save space.
 
 \noindent Despite the emphasis on hardware-based techniques such as
 cloud computing or GPGPU, there are not many papers \cite{Xia2010} dealing with
