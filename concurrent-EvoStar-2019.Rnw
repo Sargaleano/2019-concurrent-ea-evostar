@@ -172,12 +172,27 @@ mixing the populations and another for evolution. Using more threads
 for evolution, in principle, should follow the same rules, but how
 that would influence scaling is left for future papers.
 
+What we wanted to find out in these set of experiments is what is the
+generation gap that gives the best performance in terms of raw time to
+find to solution, as well as the best number of evaluations per
+second. In order to do that, we prepared an experiment using the
+OneMax function with 64 bits, a concurrent evolutionary algorithm such
+as the one described in \cite{Merelo:2018:MEA:3205651.3208317:anon},
+which is based in the free Perl 6 evolutionary algorithm library {\tt
+  Algorithm::Evolutionary::Simple}, and run the experiments in a
+machine with Ubuntu 18.04, an AMD Ryzen 7 2700X Eight-Core Processor
+at 2195MHz. The Rakudo version was 6.d, which had recently been
+released with many improvements to the concurrent core of the
+language. All scripts, as well as processing scripts and data obtained
+in the experiments is available, under a free license, from our GitHub
+repository.
+
 
 %
 \begin{figure*}[h!tb]
   \centering
 <<results-evals,cache=FALSE,echo=FALSE>>=
-ggplot(data,aes(x=evaluations,y=time,color=gap))+scale_color_brewer(palette="Set1")+geom_point()+theme_tufte()+labs(x="Evaluations",y="Time",title="Evaluations vs Time per generation gap")
+ggplot(data,aes(x=evaluations,y=time,color=gap))+scale_color_brewer(palette="Set1")+geom_point(size=3,aes(shape=gap))+theme_tufte()+labs(x="Evaluations",y="Time",title="Evaluations vs Time per generation gap")
 @
 \caption{Number of evaluations needed vs. time needed for them for
   different generation gaps, from 8 to 64 }
