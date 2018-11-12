@@ -88,86 +88,10 @@ heterogeneous distributed systems.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-\noindent Evolutionary algorithms (EA) \cite{GA_Goldberg89} are currently
-one of the most widely used meta-heuristics to solve optimization
-problems in engineering. If the cost or adequacy of a solution can be
-measured in terms of a single function, called {\em fitness},
-evolutionary algorithms are generally able to find a good solution
-given enough time. 
-Furthermore, parallel and distributed evolutionary algorithms (pEAs) are useful
-to find  solutions of problems with a time-consuming fitness function
-\cite{alba2002,Luque2011,gong2015distributed}
-% Was not very clear - M
-% Are they complex mostly in terms of running time or space?
-% In the next paragraph we talk about 'evaluation time'
-or problems that need many evaluations to find a good solution; in
-either case, using several computing {\em nodes} speeds ups the
-algorithm; even some
-authors \cite{Alba2001,evag:gpem} state that using pEAs improves the quality of
-solutions in terms of the number of evaluations needed to find
-one. This reason, together with the improvement in evaluation time
-brought by running simultaneously in several nodes, have made
-parallel and distributed evolutionary algorithms a popular
-methodology.
-
-One of the reasons for this popularity is that the implementation of
-EAs in parallel is relatively straightforward, by just dividing the
-population into computing nodes and using some messaging mechanism to
-interchange some members selected according to some optimality
-criterion \cite{DBLP:conf/gecco/AraujoGMC09}
-but programming paradigms used for the implementation of such
-algorithms are far from being an object of study in the wide
-evolutionary algorithm area; object oriented or
-procedural languages like Java and C/C++ are mostly used. Even when
-some researchers show that implementation matters
-\cite{DBLP:conf/iwann/MereloRACML11}, parallel approaches found in new
-languages/paradigms are not usually pursued; this is what we intend to
-do in this paper.
-
-The main reason for doing this is that, despite having identified new
-parallel platforms as a challenge in EAs \cite{Luque2011}, in general,
-only advances in hardware are considered. Software platforms,
-specifically programming languages, remain poorly explored; only Ada
-\cite{Santos2002}, Scala \cite{krzywicki2015massively} and Erlang
-\cite{A.Bienz2011,kerdprasop2012concurrent,Kerdprasop2013,Stypka2018,butcher2018actor} have
-been analyzed in the area of evolutionary computation. Even so, the
-number of works on this area has increased lately, since the challenge
-of multi-core, hyper-threaded architectures \cite{SutterL05} need
-better applications, even simpler ones, to be
-parallelized\cite{adeli1994concurrent}. Eventually, this  shows the need use and
-create design patterns for concurrent algorithms; the conversion of a pattern
-into a language feature is a common practice in the programming languages domain,
-and sometimes that means a language modification, others the creation
-of a new one. 
-
-
-That is the case of Perl6
-\cite{Tang:2007:PRI:1190216.1190218}, a relatively new and decidedly
-non mainstream language (since it is not included in the top ten of
-any of the most popular languages rankings), with concurrent and functional
-features in order to develop parallel versions of EAs through
-concurrency. Perl 6 started as a redesign of the implementation of
-Perl, given its inadequacy to work correctly, among other things, with
-threads. Perl 6 has a three-tier architecture, including a virtual
-machine (either MoarVM, specifically designed for Perl 6, JVM or,
-lately, GraalVM \cite{wurthinger2013one}; a second level with a
-minimal bootstrapping language called NQP (Not Quite Perl), which
-allows for easy portability among different VMs, and finally a
-compiler, of which there is just one version right now, called Rakudo.
-This paper, as well as similar ones preceding it
- \cite{DBLP:conf/gecco/CruzGGC13,Albert-Cruz2014169,Merelo:2018:MEA:3205651.3208317:anon}, are
-motivated by the need to explore new language architectures that give
-you good insight on the nature of evolutionary algorithms, as well as
-the need to create fast implementations that can be run efficiently in
-current processor architectures.
-
-This research is intended to show some possible areas of improvement
-on architecture and engineering best practices for concurrent-functional paradigms,
-as was made for Object Oriented Programming languages \cite{EO:FEA2000},
-by focusing on pEAs as a domain of application and describing how their principal
-traits can be modeled by means of concurrent-functional languages constructs.
-We are continuing the research reported in
-\cite{DBLP:conf/gecco/CruzGGC13,J.Albert-Cruz2013}.
+Concurrent programming adds a layer of abstraction over the parallel
+facilities processors and operating systems offer to offer a
+high-level interface that allows the user to program code that might
+be executed in parallel either in threads or in different processes \cite{andrews1991concurrent}. 
 
 Previously
 \cite{Merelo:2018:MEA:3205651.3208317:anon,Garcia-Valdez:2018:MEA:3205651.3205719:anon},
