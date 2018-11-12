@@ -84,13 +84,11 @@ interact with the characteristics of the evolutionary algorithm itself
 and show how they improve the scaling behavior and performance. We will use the
 Perl 6 language, which is a modern, concurrent language that was
 released recently and is still under very active development.
-% Maybe change the paragraph: 'to give a good scaling behavior' to
-% something like 'and show how they improve the scaling behavior' - M
-% Done - JJ
+\end{abstract}
+
 \keywords{Concurrent algorithms, distributed computing, stateless algorithms,
 algorithm implementation, performance evaluation, distributed computing,
 heterogeneous distributed systems.}
-\end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
@@ -103,7 +101,7 @@ evolutionary algorithms are generally able to find a good solution
 given enough time. 
 Furthermore, parallel and distributed evolutionary algorithms (pEAs) are useful
 to find  solutions of problems with a time-consuming fitness function
-\cite{alba2002,Luque2011,merelo2018cloudy,gong2015distributed}
+\cite{alba2002,Luque2011,gong2015distributed}
 % Was not very clear - M
 % Are they complex mostly in terms of running time or space?
 % In the next paragraph we talk about 'evaluation time'
@@ -162,7 +160,7 @@ minimal bootstrapping language called NQP (Not Quite Perl), which
 allows for easy portability among different VMs, and finally a
 compiler, of which there is just one version right now, called Rakudo.
 This paper, as well as similar ones preceding it
- \cite{DBLP:conf/gecco/CruzGGC13,Albert-Cruz2014169,Merelo:2018:MEA:3205651.3208317}, are
+ \cite{DBLP:conf/gecco/CruzGGC13,Albert-Cruz2014169,Merelo:2018:MEA:3205651.3208317:anon}, are
 motivated by the need to explore new language architectures that give
 you good insight on the nature of evolutionary algorithms, as well as
 the need to create fast implementations that can be run efficiently in
@@ -174,12 +172,10 @@ as was made for Object Oriented Programming languages \cite{EO:FEA2000},
 by focusing on pEAs as a domain of application and describing how their principal
 traits can be modeled by means of concurrent-functional languages constructs.
 We are continuing the research reported in
-\cite{DBLP:conf/gecco/CruzGGC13,J.Albert-Cruz2013}. This paper is an
-extended version of \cite{Merelo:2018:MEA:3205651.3208317}, including
-new results with an updated version of the evolutionary algorithm library.
+\cite{DBLP:conf/gecco/CruzGGC13,J.Albert-Cruz2013}.
 
 Previously
-\cite{Merelo:2018:MEA:3205651.3208317,Garcia-Valdez:2018:MEA:3205651.3205719},
+\cite{Merelo:2018:MEA:3205651.3208317:anon,Garcia-Valdez:2018:MEA:3205651.3205719:anon},
 we explored stateless evolutionary algorithm architectures. In this
 paper we will also see how to work with implicit parallelism at the
 instruction level, what kind of changes are needed to make it work and
