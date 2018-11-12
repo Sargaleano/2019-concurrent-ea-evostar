@@ -70,20 +70,15 @@ Institute Two
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-Concurrent languages such as Perl 6 fully leverage the power of
-current multi-core and hyper-threaded computer architectures, and they
-include easy ways of automatically parallelizing code. However, to
-achieve more computational capability by using all threads and cores,
-algorithms need to be redesigned to be run in a concurrent
-environment; in particular, the use of a reactive, fully functional
-patterns need to turn the algorithm into a series of stateless steps, with simple functions
-that receive all the context and map it to the next stage. In this paper, we
-are going to analyze different versions of these stateless, reactive
-architectures applied to evolutionary algorithms, assessing how they
-interact with the characteristics of the evolutionary algorithm itself
-and show how they improve the scaling behavior and performance. We will use the
-Perl 6 language, which is a modern, concurrent language that was
-released recently and is still under very active development.
+Creating a concurrent and stateless version of an evolutionary algorithm implies
+changes in its behavior. From the performance point of view, the main challenge is to balance computation
+with communication, but from the algorithmic point of view we have to
+keep diversity high so that the algorithm is not stuck in local
+minima. In a concurrent setting, we will have to find the right
+balance so that improvements in both fields do not cancel out. This is
+what we will be doing in this paper, where we explore the space of
+parameters of a population based concurrent evolutionary algorithm to
+find out the best combination for a particular problem.
 \end{abstract}
 
 \keywords{Concurrent algorithms, distributed computing, stateless algorithms,
