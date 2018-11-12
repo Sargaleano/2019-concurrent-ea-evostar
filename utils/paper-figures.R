@@ -10,4 +10,4 @@ ggplot(data,aes(x=evaluations,y=time,color=gap))+scale_color_brewer(palette="Set
 ggplot(data,aes(x=gap,y=evaluations,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Evaluations vs generation gap")
 ggplot(data,aes(x=gap,y=time,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Time vs generation gap")
 
-ggplot(data,aes(x=gap,y=avg.eval,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Time vs generation gap")
+ggplot(data,aes(x=gap,y=avg.eval,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Average number of evaluations vs generation gap")

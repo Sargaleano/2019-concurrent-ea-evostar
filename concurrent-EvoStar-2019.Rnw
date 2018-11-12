@@ -168,9 +168,9 @@ We will present the experimental setup next.
 \label{sec:res}
 
 In principle, we will work with two threads, one for
-mixing the populations and another for evolution. Using more threads
-for evolution, in principle, should follow the same rules, but how
-that would influence scaling is left for future papers.
+mixing the populations and another for evolution. This setup, while
+being concurrent, allows us to focus more on the basic features of the
+algorithm, which is what we are exploring in this paper. 
 
 What we wanted to find out in these set of experiments is what is the
 generation gap that gives the best performance in terms of raw time to
@@ -186,8 +186,6 @@ released with many improvements to the concurrent core of the
 language. All scripts, as well as processing scripts and data obtained
 in the experiments is available, under a free license, from our GitHub
 repository.
-
-
 %
 \begin{figure*}[h!tb]
   \centering
@@ -198,6 +196,76 @@ ggplot(data,aes(x=evaluations,y=time,color=gap))+scale_color_brewer(palette="Set
   different generation gaps, from 8 to 64 }
 \label{fig:evals}
 \end{figure*}
+%
+\begin{figure*}[h!tb]
+  \centering
+<<results-evals-bp,cache=FALSE,echo=FALSE>>=
+ggplot(data,aes(x=gap,y=evaluations,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Evaluations vs generation gap")
+@
+\caption{Number of evaluations needed for
+  different generation gaps, from 8 to 64 }
+\label{fig:evals:bp}
+\end{figure*}
+%
+\begin{figure*}[h!tb]
+  \centering
+<<results-avg-evals,cache=FALSE,echo=FALSE>>=
+ggplot(data,aes(x=gap,y=avg.eval,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Average number of evaluations vs generation gap")
+@
+\caption{Average number of evaluations per second for different generation gaps, from 8 to 64 }
+\label{fig:evals:avg}
+\end{figure*}
+
+We used a population size of 256, as well as generation gaps
+increasing from 8 to 64. Many experiments were run for every
+configuration, up to 150 in some cases. We logged the upper bound of
+the number of evaluations needed (by multiplying the number of
+messages by the number of generations and number of individuals
+evaluated; this means that this number will be an upper bound, and not
+the exact number of evaluations until a solution is reached). We will
+first look at the general picture by plotting the wallclock time in seconds
+(measured by taking the time of the starting of the algorithm and the
+last message and substracting the latter from the former) vs the
+number of evaluations that have been performed. The result is shown in
+Figure \ref{fig:evals}. Experiment with different generation gaps are
+shown with different colors (where available) and shapes, and they
+spread in an angle which is roughly bracketed by the experiments with
+a generation gap of 8, which need the most time for the same number of
+evaluations, and the experiments with a gap of 16, which usually need
+the least. The experiments with gaps = 32 or 64 are somewhere in
+between.
+
+In that same chart it can also be observed that the number of
+evaluations needed to find the 64 bit OneMax solution is quite
+different. We make a boxplot of the number of evaluations vs the
+generation gap in Figure \ref{fig:evals:bp}. This figure shows an
+increasing number of evaluations per gap size. Differences are
+significative between every generation gap and the next. This
+increasing number of evaluations per generation gap is probably due to
+the fact that the increasing number of isolated generations makes the
+population lose diversity, making finding the solution increasingly
+difficult. This is the same effect observed in parallel algorithms, as
+reported in \cite{Cantu-Paz:1999:MPT:2933923.2934003}, so it is not
+unexpected. What is unexpected is the combination of generation gap
+size and the concurrent algorithm.
+
+We plot the number of evaluations per second in Figure
+\ref{fig:evals:avg}. These show a big difference for a generation gap
+of 16, with a number of evaluations which is almost 50\% higher than
+for the rest of the generation gaps, where the difference is not so
+high. It is remarkable that it is almost the same for generation gaps
+higher than 16, and also slightly higher than for the minimum
+generation gap that has been evaluated, 8. However, in the last two
+cases the decrease in algorithmic performance more than offsets this
+small speed increase in the number of evaluations per second.
+
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
