@@ -91,14 +91,58 @@ heterogeneous distributed systems.}
 Concurrent programming adds a layer of abstraction over the parallel
 facilities processors and operating systems offer to offer a
 high-level interface that allows the user to program code that might
-be executed in parallel either in threads or in different processes \cite{andrews1991concurrent}. 
+be executed in parallel either in threads or in different processes \cite{andrews1991concurrent}.
 
-Previously
+Different languages offer different facilities for concurrency at the
+primitive level, and mainly differ on how they deal with shared state,
+that is, variables that are accessed from several
+processes. Actor-based concurrency \cite{schippers2009towards}
+eliminates shared state by introducing a series of {\em actors} that
+store state and can change it; on the other hand,  channel based
+concurrency follows the {\em communicating sequential processes}
+methodology \cite{Hoare:1978:CSP:359576.359585}, which is effectively
+stateless, with different processes reacting to channel input without
+changing state, and writing to these channels. 
+
+This kind of concurrency is the one implemented by many modern
+languages such as Go or Perl 6 \cite{lenzperl}. However, the
+statelessness of the implementation asks for a change in the
+implementation of any algorithm. In particular, evolutionary
+algorithms need to change to fit an architecture that creates and
+processes streams of data using functions that do not change state. 
+
+
+In previous papers 
 \cite{Merelo:2018:MEA:3205651.3208317:anon,Garcia-Valdez:2018:MEA:3205651.3205719:anon},
-we explored stateless evolutionary algorithm architectures. In this
-paper we will also see how to work with implicit parallelism at the
-instruction level, what kind of changes are needed to make it work and
-the speedups that can be achieved in that case.
+we presented the proof of concept and initial results with this kind
+of stateless evolutionary algorithms, implemented in the Perl 6
+language. These evolutionary algorithms use a single channel where
+whole populations are sent. The (stateless) functions read a single
+population from the channel, run an evolutionary algorithm for a fixed
+number of generations, which we call the {\em generation gap} or
+simply {\em gap}, and send the population in the final generation back
+to the channel. Several populations are created initially, and a
+concurrent {\em mixer} is run which takes populations in couples,
+mixes them leaving only a single population with the best. This {\em
+  gap} is then conceptually, if not functionally, similar to the {\em
+  time to migration} in parallel evolutionary algorithms (which which
+concurrent evolutionary algorithms have a big resemblance).
+
+We did some initial exploration of the parameter space in
+\cite{merelo:WEA:anon}. In these initial explorations we realized
+that the parameters we used had an influence at the algorithmic level,
+but also at the implementation level, changing the wallclock
+performance of the algorithm.
+
+In this paper we will explore the parameter space systematically
+looking particularly at two parameters that have a very important
+influence on performance: population size and generation gap. Our
+intention is to create a rule of thumb for setting them in this kind
+of algorithms, so that they are able to achieve the best
+performance. In principle, we will work with two threads, one for
+mixing the populations and another for evolution. Using more threads
+for evolution, in principle, should follow the same rules, but how
+that would influence scaling is left for future papers.
 
 
 The rest of the paper is organized as follows. Next section presents the state
@@ -185,15 +229,6 @@ many application domains; Clojure is another one with concurrent
 features such as promises/futures, Software Transaction Memory and
 agents; Kotlin \cite{simson2017open} has been recently used for
 implementing a functional evolutionary algorithm framework.  
-
-On the
-other hand, Perl 6 \cite{Tang:2007:PRI:1190215.1190218} uses different
-concurrency models, that go from implicit concurrency using a
-particular function that automatically parallelizes operations on
-iterable data structures, to explicit concurrency using threads. These
-both types of concurrency will be analyzed in this paper, which uses
-the {\tt Algorithm::Evolutionary::Simple} library for that language
-which was presented in the same conference \cite{DBLP:conf/gecco/GuervosV18}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
