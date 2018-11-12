@@ -38,7 +38,7 @@ comparison.64 <- rbind(comparison.64,
 
 @
 
-\title{Going stateless in concurrent evolutionary algorithms}
+\title{Exploring concurrent evolutionary algorithms}
 
 % \author{Juan J. Merelo\inst{1}
 % \and
@@ -108,7 +108,7 @@ to find  solutions of problems with a time-consuming fitness function
 or problems that need many evaluations to find a good solution; in
 either case, using several computing {\em nodes} speeds ups the
 algorithm; even some
-authors \cite{Alba2001,Jini:Paralelos,evag:gpem} state that using pEAs improves the quality of
+authors \cite{Alba2001,evag:gpem} state that using pEAs improves the quality of
 solutions in terms of the number of evaluations needed to find
 one. This reason, together with the improvement in evaluation time
 brought by running simultaneously in several nodes, have made
