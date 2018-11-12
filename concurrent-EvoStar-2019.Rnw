@@ -38,10 +38,7 @@ comparison.64 <- rbind(comparison.64,
 
 @
 
-\title{Exploring concurrent evolutionary algorithms}
-% Juanlu -Consider the title:
-% Juanlu -\title{Exploring concurrent and stateless evolutionary algorithms}
-% Juanlu - I think missing stateless is missing a good selling point of the paper
+\title{Exploring concurrent and stateless evolutionary algorithms}
 
 % \author{Juan J. Merelo\inst{1}
 % \and
