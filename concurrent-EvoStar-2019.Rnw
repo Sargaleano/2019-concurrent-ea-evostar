@@ -69,7 +69,7 @@ heterogeneous distributed systems.}
 \section{Introduction}
 
 Concurrent programming adds a layer of abstraction over the parallel
-facilities processors and operating systems offer to offer a
+facilities processors and operating systems to offer a
 high-level interface that allows the user to program code that might
 be executed in parallel either in threads or in different processes \cite{andrews1991concurrent}.
 
@@ -91,7 +91,7 @@ implementation of any algorithm. In particular, evolutionary
 algorithms need to change to fit an architecture that creates and
 processes streams of data using functions that do not change state. 
 
-\noindent Despite the emphasis on hardware-based techniques such as
+Despite the emphasis on hardware-based techniques such as
 cloud computing or GPGPU, there are not many papers \cite{Xia2010} dealing with
 creating concurrent evolutionary algorithms that work in a single
 computing node or that extend seamlessly from single to many computers.
@@ -112,9 +112,9 @@ reported speed-up was $\times 960$ which is beyond the linear $\times
 account.  
 
 The aforementioned algorithm used a protocol that worked
-asynchronously, leveraging its peer to peer capabilities; in general
+asynchronously, leveraging its peer-to-peer capabilities; in general
 the design of concurrent EAs has to take into account the
-communication</synchronization 
+communication/synchronization 
 between processes, which nowadays will be mainly threads. Although the
 paper above was original in its approach, other authors targeted
 explicitly multi-core architectures, such as Tagawa
@@ -140,6 +140,7 @@ mixes them leaving only a single population with the best individuals
 selected from the two merged populations.
 % Juanlu - for the future, it would be interesting to study several policies, such as keeping a high diversity instead of just the best individuals. !? 
 % Please write an issue so that we don't forget - JJ
+% Done - Juanlu
  This {\em
   gap} is then conceptually, if not functionally, similar to the {\em
   time to migration} in parallel evolutionary algorithms (with which
@@ -172,9 +173,9 @@ mixing the populations and another for evolution. This setup, while
 being concurrent, allows us to focus more on the basic features of the
 algorithm, which is what we are exploring in this paper. 
 
-What we wanted to find out in these set of experiments is what is the
+What we want to find out in these set of experiments is what is the
 generation gap that gives the best performance in terms of raw time to
-find to solution, as well as the best number of evaluations per
+find a solution, as well as the best number of evaluations per
 second. In order to do that, we prepared an experiment using the
 OneMax function with 64 bits, a concurrent evolutionary algorithm such
 as the one described in \cite{Merelo:2018:MEA:3205651.3208317:anon},
@@ -184,7 +185,7 @@ machine with Ubuntu 18.04, an AMD Ryzen 7 2700X Eight-Core Processor
 at 2195MHz. The Rakudo version was 6.d, which had recently been
 released with many improvements to the concurrent core of the
 language. All scripts, as well as processing scripts and data obtained
-in the experiments is available, under a free license, from our GitHub
+in the experiments are available, under a free license, from our GitHub
 repository.
 %
 \begin{figure*}[h!tb]
@@ -227,7 +228,7 @@ first look at the general picture by plotting the wallclock time in seconds
 (measured by taking the time of the starting of the algorithm and the
 last message and substracting the latter from the former) vs the
 number of evaluations that have been performed. The result is shown in
-Figure \ref{fig:evals}. Experiment with different generation gaps are
+Figure \ref{fig:evals}. Experiments with different generation gaps are
 shown with different colors (where available) and shapes, and they
 spread in an angle which is roughly bracketed by the experiments with
 a generation gap of 8, which need the most time for the same number of
@@ -248,6 +249,7 @@ difficult. This is the same effect observed in parallel algorithms, as
 reported in \cite{Cantu-Paz:1999:MPT:2933923.2934003}, so it is not
 unexpected. What is unexpected is the combination of generation gap
 size and the concurrent algorithm.
+% Here it would be interesting to describe why is unexpected? - Juanlu
 
 We plot the number of evaluations per second in Figure
 \ref{fig:evals:avg}. These show a big difference for a generation gap
@@ -258,6 +260,7 @@ higher than 16, and also slightly higher than for the minimum
 generation gap that has been evaluated, 8. However, in the last two
 cases the decrease in algorithmic performance more than offsets this
 small speed increase in the number of evaluations per second.
+% I don't feel confortable modifying this paragraph, but I find it a bit twisted - Juanlu
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
@@ -265,7 +268,7 @@ small speed increase in the number of evaluations per second.
 \label{sec:conclusions}
 
 In this paper we have set out to explore the interaction between the
-generation gap and the algorithmic parameters. From the point of view
+generation gap and the algorithmic parameters in a concurrent and stateless evolutionoary algorithm. From the point of view
 of the algorithm, increasing the generation gap favors exploitation
 over exploration, which might be a plus in some problems, but also
 decreases diversity, which might lead to premature convergence; in a
