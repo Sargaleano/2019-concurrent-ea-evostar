@@ -138,9 +138,6 @@ to the channel. Several populations are created initially, and a
 concurrent {\em mixer} is run which takes populations in couples,
 mixes them leaving only a single population with the best individuals
 selected from the two merged populations.
-% Juanlu - for the future, it would be interesting to study several policies, such as keeping a high diversity instead of just the best individuals. !? 
-% Please write an issue so that we don't forget - JJ
-% Done - Juanlu
  This {\em
   gap} is then conceptually, if not functionally, similar to the {\em
   time to migration} in parallel evolutionary algorithms (with which
@@ -158,8 +155,6 @@ influence on performance: population size and generation gap. Our
 intention is to create a rule of thumb for setting them in this kind
 of algorithms, so that they are able to achieve the best
 performance. 
-% Juanlu - If space is needed, the rest of the paragraph is expendable as it will appear in the Experimental Setup section.
-
 
 We will present the experimental setup next.
 
@@ -216,6 +211,15 @@ ggplot(data,aes(x=gap,y=avg.eval,group=gap))+geom_boxplot()+theme_tufte()+labs(t
 \caption{Average number of evaluations per second for different generation gaps, from 8 to 64 }
 \label{fig:evals:avg}
 \end{figure*}
+%
+\begin{figure*}[h!tb]
+  \centering
+<<results-avg-time,cache=FALSE,echo=FALSE>>=
+ggplot(data,aes(x=gap,y=time,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Time vs generation gap")
+@
+\caption{Boxplot of the average wallclock time for different generation gaps, from 8 to 64 }
+\label{fig:time}
+\end{figure*}
 
 We used a population size of 256, as well as generation gaps
 increasing from 8 to 64. Many experiments were run for every
@@ -248,19 +252,26 @@ population lose diversity, making finding the solution increasingly
 difficult. This is the same effect observed in parallel algorithms, as
 reported in \cite{Cantu-Paz:1999:MPT:2933923.2934003}, so it is not
 unexpected. What is unexpected is the combination of generation gap
-size and the concurrent algorithm.
+size and the concurrent algorithm, since it is impossible to know in
+advance what is the optimal computation to communication balance.
 % Here it would be interesting to describe why is unexpected? - Juanlu
+% done - JJ
 
 We plot the number of evaluations per second in Figure
 \ref{fig:evals:avg}. These show a big difference for a generation gap
 of 16, with a number of evaluations which is almost 50\% higher than
 for the rest of the generation gaps, where the difference is not so
-high. It is remarkable that it is almost the same for generation gaps
-higher than 16, and also slightly higher than for the minimum
-generation gap that has been evaluated, 8. However, in the last two
-cases the decrease in algorithmic performance more than offsets this
-small speed increase in the number of evaluations per second.
+high. 
+
+
+The number of evaluation per second does not follow a clear trend. It
+falls and remains flat for a generation gap higher than 16; it is also slightly higher than for the minimum
+generation gap that has been evaluated, 8. This generation gap,
+however, presents also the lowest number of evaluations to solution,
+which means that, on average, the solution will be found faster with a
+generation gap of 8 or 16. This is shown in Figure \ref{fig:time}.
 % I don't feel confortable modifying this paragraph, but I find it a bit twisted - Juanlu
+% Rewritten - JJ
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
