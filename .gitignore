@@ -12,6 +12,9 @@
 *.cb2
 *.tex
 
+# MacOS
+.DS_Store
+
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
