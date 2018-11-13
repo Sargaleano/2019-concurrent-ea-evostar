@@ -1,3 +1,7 @@
+2018-11-13  Juan J. merelo  <jmerelo@penny>
+
+	* concurrent-EvoStar-2019.Rnw: Revises final version without experiments in the hanged computer. Autothreading was tested for the WEA paper, and individual-based concurrency with a heavier function was also tested. It wasn't worth the while, since apparently at least a couple of seconds of operation are needed for communication to be worth the while. Less than that makes communication too heavy.
+
 2018-11-11  JJMerelo  <jmerelo@bojack>
 
 	* utils/chart.R: Two more experiments, or sets of experiments, should be proposed:
