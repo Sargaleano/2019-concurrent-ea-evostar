@@ -28,7 +28,7 @@ data$gap = as.factor(data$gap)
  \and
  José-Mario García-Valdez\inst{3}
 \and
-Sergio Rojas\inst{??}
+Sergio Rojas\inst{4}
 }
 
  \institute{%
@@ -44,6 +44,11 @@ Sergio Rojas\inst{??}
  Calzada Tecnológico, s/n\\
  Tijuana, Mexico\\
  \email{mario@tectijuana.edu.mx}
+ \and
+ School of Engineering\\
+ Universidad Distrital Francisco José de Caldas\\
+ Bogotá, Colombia\\
+ \email{srojas@udistrital.edu.co}
 }
 
 
