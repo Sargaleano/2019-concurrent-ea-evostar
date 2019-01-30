@@ -20,32 +20,42 @@ data$gap = as.factor(data$gap)
 
 \title{Exploring concurrent and stateless evolutionary algorithms}
 
-% \author{Juan J. Merelo\inst{1}
-% \and
-% José-Mario García-Valdez\inst{2}}
-
-% \institute{%
-%   Universidad de Granada/CITIC\\
-%   Granada, Spain\\
-%   \email{jmerelo@ugr.es}\\
-% \and
-% Instituto Tecnológico de Tijuana\\
-% Calzada Tecnológico, s/n\\
-% Tijuana\\
-% Mexico\\
-% \email{mario@tectijuana.edu.mx}
-% }
-
-
-\author{A. U. Thorone \inst{1}
+ \author{Juan J. Merelo\inst{1}
+ \and
+ J.L.J. Laredo\inst{2}
+ \and
+ Pedro A. Castillo\inst{1}
+ \and
+ José-Mario García-Valdez\inst{3}
 \and
-A. U. Thortwo \inst{2}}
-
-\institute{%
-Institute One\\
-\and
-Institute Two
+Sergio Rojas\inst{??}
 }
+
+ \institute{%
+   Universidad de Granada/CITIC\\
+   Granada, Spain\\
+   \email{\{jmerelo,pacv\}@ugr.es}\\
+ \and
+	RI2C-LITIS, Université du Havre Normandie\\
+   Le Havre, France\\
+   \email{juanlu.jimenez@univ-lehavre.fr}\\
+ \and
+ Instituto Tecnológico de Tijuana\\
+ Calzada Tecnológico, s/n\\
+ Tijuana, Mexico\\
+ \email{mario@tectijuana.edu.mx}
+}
+
+
+%\author{A. U. Thorone \inst{1}
+%\and
+%A. U. Thortwo \inst{2}}
+%
+%\institute{%
+%Institute One\\
+%\and
+%Institute Two
+%}
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,7 +136,7 @@ processes, although all communication takes place with a common
 central thread. 
 
 In our previous papers 
-\cite{Merelo:2018:MEA:3205651.3208317:anon,Garcia-Valdez:2018:MEA:3205651.3205719:anon},
+\cite{Merelo:2018:MEA:3205651.3208317,Garcia-Valdez:2018:MEA:3205651.3205719},
 we presented the proof of concept and initial results with this kind
 of stateless evolutionary algorithms, implemented in the Perl 6
 language. These evolutionary algorithms use a single channel where
@@ -144,7 +154,7 @@ selected from the two merged populations.
 concurrent evolutionary algorithms have a big resemblance).
 
 We did some initial exploration of the parameter space in
-\cite{merelo:WEA:anon}. In these initial explorations we realized
+\cite{merelo:WEA}. In these initial explorations we realized
 that the parameters we used had an influence at the algorithmic level,
 but also at the implementation level, changing the wallclock
 performance of the algorithm.
@@ -173,7 +183,7 @@ generation gap that gives the best performance in terms of raw time to
 find a solution, as well as the best number of evaluations per
 second. In order to do that, we prepared an experiment using the
 OneMax function with 64 bits, a concurrent evolutionary algorithm such
-as the one described in \cite{Merelo:2018:MEA:3205651.3208317:anon},
+as the one described in \cite{Merelo:2018:MEA:3205651.3208317},
 which is based in the free Perl 6 evolutionary algorithm library {\tt
   Algorithm::Evolutionary::Simple}, and run the experiments in a
 machine with Ubuntu 18.04, an AMD Ryzen 7 2700X Eight-Core Processor
@@ -323,16 +333,16 @@ other different setup. This is left as future work.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgements}
 
-%%   This paper has been supported in part by
-%% projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
-%% Competitiveness) and DeepBio (TIN2017-85727-C4-2-P). I would like to
-%% express my gratefulness to the users in the \#perl6 IRC channel,
-%% specially Elizabeth Mattijsen, Timo Paulsen and Zoffix Znet, who
-%% helped me with the adventure of programming efficient concurrent
-%% evolutionary algorithms. 
-Acknowledgements taking\\
-this much\\
-space
+   This paper has been supported in part by
+ projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
+ Competitiveness), DeepBio (TIN2017-85727-C4-2-P) and AMED (co-funded by European Regional Development Fund and the region Normandy). I would like to
+ express my gratefulness to the users in the \#perl6 IRC channel,
+ specially Elizabeth Mattijsen, Timo Paulsen and Zoffix Znet, who
+ helped me with the adventure of programming efficient concurrent
+ evolutionary algorithms. 
+%Acknowledgements taking\\
+%this much\\
+%space
 
 \bibliographystyle{splncs04}
 \bibliography{geneura,concurrent,perl6}
