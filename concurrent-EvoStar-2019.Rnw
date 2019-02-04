@@ -9,6 +9,7 @@
 
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 <<setup, cache=FALSE,echo=FALSE>>=
 library(ggplot2)
@@ -28,7 +29,7 @@ data$gap = as.factor(data$gap)
  \and
  José-Mario García-Valdez\inst{3}
 \and
-Sergio Rojas\inst{4}
+Sergio Rojas-Galeano\inst{4}
 }
 
  \institute{%
@@ -66,13 +67,12 @@ Sergio Rojas\inst{4}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 Creating a concurrent and stateless version of an evolutionary algorithm implies
-changes in its behavior. From the performance point of view, the main challenge is to balance computation
-with communication, but from the algorithmic point of view we have to
+changes in its algorithmic model. From the performance point of view, the main challenge is to balance computation
+with communication, but from the evolutionary point of view another challenge is to
 keep diversity high so that the algorithm is not stuck in local
 minima. In a concurrent setting, we will have to find the right
-balance so that improvements in both fields do not cancel out. This is
-what we will be doing in this paper, where we explore the space of
-parameters of a population based concurrent evolutionary algorithm to
+balance so that improvements in both facets do not cancel out. In this paper we address such an issue, by exploring the space of
+parameters of a population based concurrent evolutionary algorithm thet yields to
 find out the best combination for a particular problem.
 \end{abstract}
 
@@ -83,9 +83,9 @@ heterogeneous distributed systems.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-Concurrent programming adds a layer of abstraction over the parallel
-facilities processors and operating systems to offer a
-high-level interface that allows the user to program code that might
+Concurrent programming adds a layer of abstraction on the 
+machinery of processors and operating systems to offer a
+high-level interface that enables the user to program code that might
 be executed in parallel either in threads or in different processes \cite{andrews1991concurrent}.
 
 Different languages offer different facilities for concurrency at the
@@ -101,9 +101,9 @@ changing state, and writing to these channels.
 
 This kind of concurrency is the one implemented by many modern
 languages such as Go or Perl 6 \cite{lenzperl}. However, the
-statelessness of the implementation asks for a change in the
+statelessness of the implementation requests for a change in the
 implementation of any algorithm. In particular, evolutionary
-algorithms need to change to fit an architecture that creates and
+algorithms need to migrate its computation model to an architecture that creates and
 processes streams of data using functions that do not change state. 
 
 Despite the emphasis on hardware-based techniques such as
@@ -145,7 +145,7 @@ In our previous papers
 we presented the proof of concept and initial results with this kind
 of stateless evolutionary algorithms, implemented in the Perl 6
 language. These evolutionary algorithms use a single channel where
-whole populations are sent. The (stateless) functions read a single
+entire populations are sent. The (stateless) functions read a single
 population from the channel, run an evolutionary algorithm for a fixed
 number of generations, which we call the {\em generation gap} or
 simply {\em gap}, and send the population in the final generation back
@@ -156,7 +156,7 @@ selected from the two merged populations.
  This {\em
   gap} is then conceptually, if not functionally, similar to the {\em
   time to migration} in parallel evolutionary algorithms (with which
-concurrent evolutionary algorithms have a big resemblance).
+concurrent evolutionary algorithms show a big resemblance).
 
 We did some initial exploration of the parameter space in
 \cite{merelo:WEA}. In these initial explorations we realized
@@ -168,7 +168,7 @@ In this paper we will explore the parameter space systematically
 looking particularly at two parameters that have a very important
 influence on performance: population size and generation gap. Our
 intention is to create a rule of thumb for setting them in this kind
-of algorithms, so that they are able to achieve the best
+of concurrent model, so that they are able to achieve the best
 performance. 
 
 We will present the experimental setup next.
@@ -178,10 +178,10 @@ We will present the experimental setup next.
 \section{Experimental setup and results}
 \label{sec:res}
 
-In principle, we will work with two threads, one for
+Initially, we will work with two threads, one for
 mixing the populations and another for evolution. This setup, while
 being concurrent, allows us to focus more on the basic features of the
-algorithm, which is what we are exploring in this paper. 
+algorithm, which is what we aim exploring in this paper. 
 
 What we want to find out in these set of experiments is what is the
 generation gap that gives the best performance in terms of raw time to
@@ -194,47 +194,57 @@ which is based in the free Perl 6 evolutionary algorithm library {\tt
 machine with Ubuntu 18.04, an AMD Ryzen 7 2700X Eight-Core Processor
 at 2195MHz. The Rakudo version was 6.d, which had recently been
 released with many improvements to the concurrent core of the
-language. All scripts, as well as processing scripts and data obtained
+language. All processing scripts as well as data obtained
 in the experiments are available, under a free license, from our GitHub
 repository.
 %
 \begin{figure*}[h!tb]
+\fbox{
   \centering
 <<results-evals,cache=FALSE,echo=FALSE>>=
 ggplot(data,aes(x=evaluations,y=time,color=gap))+scale_color_brewer(palette="Set1")+geom_point(size=3,aes(shape=gap))+theme_tufte()+labs(x="Evaluations",y="Time",title="Evaluations vs Time per generation gap")
 @
-\caption{Number of evaluations needed vs. time needed for them for
-  different generation gaps, from 8 to 64 }
+}
+\caption{Number of evaluations vs. time needed for 
+  different generation gaps (8 to 64) }
 \label{fig:evals}
 \end{figure*}
 %
 \begin{figure*}[h!tb]
+\fbox{
   \centering
 <<results-evals-bp,cache=FALSE,echo=FALSE>>=
 ggplot(data,aes(x=gap,y=evaluations,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Evaluations vs generation gap")
 @
+}
 \caption{Number of evaluations needed for
-  different generation gaps, from 8 to 64 }
+  different generation gaps (8 to 64) }
 \label{fig:evals:bp}
 \end{figure*}
 %
 \begin{figure*}[h!tb]
+  \fbox{
   \centering
 <<results-avg-evals,cache=FALSE,echo=FALSE>>=
 ggplot(data,aes(x=gap,y=avg.eval,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Average number of evaluations vs generation gap")
 @
-\caption{Average number of evaluations per second for different generation gaps, from 8 to 64 }
+}
+\caption{Average number of evaluations per second for different generation gaps (8 to 64) }
 \label{fig:evals:avg}
 \end{figure*}
 %
+
 \begin{figure*}[h!tb]
+\fbox{
   \centering
 <<results-avg-time,cache=FALSE,echo=FALSE>>=
 ggplot(data,aes(x=gap,y=time,group=gap))+geom_boxplot()+theme_tufte()+labs(title="Time vs generation gap")
 @
-\caption{Boxplot of the average wallclock time for different generation gaps, from 8 to 64 }
+}
+\caption{Boxplot of the average wallclock time for different generation gaps (8 to 64) }
 \label{fig:time}
 \end{figure*}
+
 
 We used a population size of 256, as well as generation gaps
 increasing from 8 to 64. Many experiments were run for every
@@ -294,14 +304,14 @@ generation gap of 8 or 16. This is shown in Figure \ref{fig:time}.
 \label{sec:conclusions}
 
 In this paper we have set out to explore the interaction between the
-generation gap and the algorithmic parameters in a concurrent and stateless evolutionary algorithm. From the point of view
+generation gap and the performance measures in a concurrent and stateless evolutionary algorithm. From the point of view
 of the algorithm, increasing the generation gap favors exploitation
 over exploration, which might be a plus in some problems, but also
 decreases diversity, which might lead to premature convergence; in a
 parallel setting, this will make the algorithm need more evaluations
 to find a solution. The effect in a concurrent program goes in the
 opposite direction: by decreasing communication, the amount of
-code that can be executed concurrently increases, increasing
+code that can be executed concurrently increases, thus improving
 performance. Since the two effects cancel out, in this paper we have
 used a experimental methodology to find out what is the combination
 that is able to minimize wallclock time, which is eventually what we
@@ -310,7 +320,7 @@ while, at the same time, increasing by a small quantity the number of
 evaluations needed to find the solution.
 
 For the specific problem we have used in this short paper, a 64-bit
-onemax, the generation gap that is in that area is 16. The time to
+Onemax, the generation gap that seems to be more appropiate is around 16. The time to
 communication for that specific generation gap is around 2 seconds,
 since 16 generations imply 4096 evaluations and evaluation speed is
 approximately 2K/s. This gives us a ballpark of the amount of
@@ -320,8 +330,8 @@ channel, and this implies a certain overhead in reading, transmiting
 and writing. Increasing the population size also increases that
 overhead.
 
-We can thus deduce than the amount of computation, for this particular
-machine, should be on the order of 2 seconds, so that it effectively
+We can thus reason than the amount of computation, for this particular
+hardware, should be in the order of 2 seconds, so that it effectively
 overcomes the amount of communication needed. This amount could be
 played out in different way, for instance by increasing the
 population; if the evaluation function takes more time, different
@@ -330,10 +340,9 @@ particular amount of time is reached.
 
 With these conclusions in mind, we can set out to work with other
 parameters, such as population size or number of initial populations,
-so that the loss of diversity for bigger population sizes is
-overcome. Also we have to somehow overcome the problem of the message
-size by using a statistical distribution of the population, or simply
-other different setup. This is left as future work.
+so that the loss of diversity for bigger population sizes can be
+overcomed. Also we have to somehow address the problem of the message
+size during communication to and from the channel; in this respect, we are planning to resort to a compact representation of the population, obtained either by a statistical distribution model or  a standard compression algorithm. This is left as an anvenue for future work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Acknowledgements}
